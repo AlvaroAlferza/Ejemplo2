@@ -5,6 +5,7 @@ export type Product = {
   description: string;
   price: number;
   image: string;
+  images?: string[];
   featured?: boolean;
 };
 
@@ -16,9 +17,18 @@ export const products: Product[] = [
     description:
       "Personaje decorativo ideal para darle personalidad a tus espacios.",
     price: 89,
-    image: "/images/products/elfo-01.jpg",
+
+    image: "/images/adornos2.jpg",
+
+    images: [
+      "/images/adornos2.jpg",
+      "/images/adornos3.jpg",
+      "/images/adornos4.jpg",
+    ],
+
     featured: true,
   },
+
   {
     id: "papa-noel-decorativo",
     name: "Papá Noel decorativo",
@@ -26,9 +36,18 @@ export const products: Product[] = [
     description:
       "Una pieza protagonista para crear un ambiente navideño especial.",
     price: 95,
-    image: "/images/products/papa-noel-01.jpg",
+
+    image: "/images/adornos2.jpg",
+
+    images: [
+      "/images/adornos2.jpg",
+      "/images/adornos3.jpg",
+      "/images/adornos4.jpg",
+    ],
+
     featured: true,
   },
+
   {
     id: "peluche-navideno",
     name: "Peluche navideño",
@@ -36,7 +55,15 @@ export const products: Product[] = [
     description:
       "Un detalle cálido para complementar la decoración de Navidad.",
     price: 79,
-    image: "/images/products/peluche-01.jpg",
+
+    image: "/images/adornos2.jpg",
+
+    images: [
+      "/images/adornos2.jpg",
+      "/images/adornos3.jpg",
+      "/images/adornos4.jpg",
+    ],
+
     featured: true,
   },
 ];

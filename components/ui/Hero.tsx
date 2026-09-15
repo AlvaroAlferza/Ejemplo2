@@ -16,111 +16,120 @@ export default function Hero() {
         isolate
         min-h-screen
         overflow-hidden
-        bg-[#12352B]
+        bg-[#081510]
         text-[#F6F0E5]
       "
     >
-      {/* ================= FONDOS ================= */}
+      {/* ================= VIDEO DE FONDO ================= */}
 
-      <div className="pointer-events-none absolute inset-0 -z-20 overflow-hidden">
-
-        {/* Glow superior */}
-
-        <motion.div
-          animate={{
-            scale: [1, 1.12, 1],
-            opacity: [0.18, 0.28, 0.18],
-          }}
-          transition={{
-            duration: 9,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="
-            absolute
-            -right-32
-            -top-32
-            h-[500px]
-            w-[500px]
-            rounded-full
-            bg-[#C8A45D]
-            blur-[140px]
-          "
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        className="
+          absolute
+          inset-0
+          -z-20
+          h-full
+          w-full
+          object-cover
+        "
+      >
+        <source
+          src="/images/navidad1.mp4"
+          type="video/mp4"
         />
+      </video>
 
-        {/* Glow rojo */}
+      {/* ================= CAPA OSCURA ================= */}
 
-        <motion.div
-          animate={{
-            scale: [1, 1.18, 1],
-            opacity: [0.08, 0.16, 0.08],
-          }}
-          transition={{
-            duration: 11,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="
-            absolute
-            -bottom-40
-            -left-32
-            h-[500px]
-            w-[500px]
-            rounded-full
-            bg-[#7A2631]
-            blur-[150px]
-          "
-        />
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          -z-10
+          bg-[#081510]/55
+        "
+      />
 
-        {/* Textura sutil */}
+      {/* ================= DEGRADADO ================= */}
 
-        <div
-          className="
-            absolute
-            inset-0
-            opacity-[0.035]
-          "
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, #F6F0E5 1px, transparent 0)",
-            backgroundSize: "32px 32px",
-          }}
-        />
-      </div>
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          -z-10
+          bg-gradient-to-b
+          from-[#081510]/35
+          via-[#081510]/45
+          to-[#081510]/85
+        "
+      />
 
-      {/* ================= ESTRELLAS ================= */}
+      {/* ================= GLOW ================= */}
 
       <motion.div
         animate={{
-          y: [0, -10, 0],
-          opacity: [0.35, 0.8, 0.35],
+          scale: [1, 1.12, 1],
+          opacity: [0.1, 0.2, 0.1],
         }}
         transition={{
-          duration: 4,
+          duration: 9,
           repeat: Infinity,
           ease: "easeInOut",
         }}
         className="
           pointer-events-none
           absolute
-          left-[8%]
-          top-[22%]
+          -right-32
+          -top-32
+          -z-10
+          h-[500px]
+          w-[500px]
+          rounded-full
+          bg-[#C8A45D]
+          blur-[150px]
+        "
+      />
+
+      {/* ================= ESTRELLAS ================= */}
+
+      <motion.div
+        animate={{
+          y: [0, -10, 0],
+          opacity: [0.2, 0.65, 0.2],
+          rotate: [0, 10, 0],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="
+          pointer-events-none
+          absolute
+          left-[10%]
+          top-[27%]
+          text-[#E7D8B8]
         "
       >
         <Star
           size={13}
           fill="currentColor"
-          className="text-[#E7D8B8]"
         />
       </motion.div>
 
       <motion.div
         animate={{
           y: [0, 8, 0],
-          opacity: [0.2, 0.65, 0.2],
+          opacity: [0.15, 0.5, 0.15],
         }}
         transition={{
-          duration: 5,
+          duration: 6,
           repeat: Infinity,
           ease: "easeInOut",
           delay: 1,
@@ -128,68 +137,37 @@ export default function Hero() {
         className="
           pointer-events-none
           absolute
-          left-[46%]
-          top-[18%]
-        "
-      >
-        <Star
-          size={9}
-          fill="currentColor"
-          className="text-[#C8A45D]"
-        />
-      </motion.div>
-
-      <motion.div
-        animate={{
-          y: [0, -7, 0],
-          opacity: [0.25, 0.7, 0.25],
-        }}
-        transition={{
-          duration: 4.5,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 0.5,
-        }}
-        className="
-          pointer-events-none
-          absolute
           right-[12%]
-          top-[35%]
+          top-[34%]
+          text-[#C8A45D]
         "
       >
-        <Star
-          size={11}
-          fill="currentColor"
-          className="text-[#E7D8B8]"
-        />
+        <Sparkles size={15} />
       </motion.div>
 
       {/* ================= CONTENIDO ================= */}
 
       <div
         className="
+          relative
           mx-auto
           flex
           min-h-screen
           max-w-7xl
-          flex-col
           items-center
           justify-center
           px-6
-          pb-16
+          pb-20
           pt-28
           text-center
           sm:px-8
           lg:px-10
         "
       >
-
-        {/* ================= TEXTO ================= */}
-
         <motion.div
           initial={{
             opacity: 0,
-            y: 35,
+            y: 30,
           }}
           animate={{
             opacity: 1,
@@ -208,47 +186,37 @@ export default function Hero() {
             items-center
           "
         >
-
-          {/* LABEL */}
+          {/* ICONO */}
 
           <motion.div
             initial={{
               opacity: 0,
-              y: 15,
+              scale: 0.8,
             }}
             animate={{
               opacity: 1,
-              y: 0,
+              scale: 1,
             }}
             transition={{
               delay: 0.15,
               duration: 0.6,
             }}
             className="
-              mb-6
-              inline-flex
+              mb-7
+              flex
+              h-9
+              w-9
               items-center
-              gap-2
+              justify-center
               rounded-full
               border
-              border-[#E7D8B8]/20
-              bg-[#F6F0E5]/[0.05]
-              px-4
-              py-2
-              text-[10px]
-              font-medium
-              uppercase
-              tracking-[0.22em]
-              text-[#E7D8B8]
+              border-[#C8A45D]/40
+              bg-[#081510]/30
+              text-[#C8A45D]
               backdrop-blur-md
             "
           >
-            <Sparkles
-              size={13}
-              className="text-[#C8A45D]"
-            />
-
-            Navidad artesanal
+            <Sparkles size={15} />
           </motion.div>
 
           {/* TITULO */}
@@ -269,10 +237,11 @@ export default function Hero() {
             }}
             className="
               max-w-4xl
-              text-[clamp(3rem,6vw,5.6rem)]
+              text-[clamp(2.8rem,5.5vw,5rem)]
               font-medium
-              leading-[0.94]
+              leading-[0.95]
               tracking-[-0.06em]
+              drop-shadow-[0_10px_35px_rgba(0,0,0,0.35)]
             "
           >
             Una Navidad
@@ -300,10 +269,11 @@ export default function Hero() {
             }}
             className="
               mt-7
-              max-w-2xl
+              max-w-xl
               text-sm
               leading-6
-              text-[#F6F0E5]/60
+              text-[#F6F0E5]/75
+              drop-shadow-[0_5px_20px_rgba(0,0,0,0.35)]
               sm:text-base
               sm:leading-7
             "
@@ -314,7 +284,7 @@ export default function Hero() {
             una vez al año.
           </motion.p>
 
-          {/* CTA */}
+          {/* BOTÓN */}
 
           <motion.div
             initial={{
@@ -335,6 +305,8 @@ export default function Hero() {
               href="#productos"
               whileHover={{
                 scale: 1.035,
+                boxShadow:
+                  "0 18px 50px rgba(200,164,93,0.35)",
               }}
               whileTap={{
                 scale: 0.97,
@@ -351,10 +323,9 @@ export default function Hero() {
                 text-sm
                 font-semibold
                 text-[#171714]
-                shadow-[0_15px_45px_rgba(200,164,93,0.18)]
+                shadow-[0_15px_45px_rgba(0,0,0,0.25)]
                 transition-shadow
                 duration-300
-                hover:shadow-[0_20px_55px_rgba(200,164,93,0.3)]
               "
             >
               Explorar colección
@@ -371,7 +342,7 @@ export default function Hero() {
             </motion.a>
           </motion.div>
 
-          {/* DETALLE INFERIOR */}
+          {/* DETALLE */}
 
           <motion.div
             initial={{
@@ -389,305 +360,22 @@ export default function Hero() {
               flex
               items-center
               gap-4
-              text-[10px]
+              text-[9px]
               uppercase
-              tracking-[0.18em]
-              text-[#F6F0E5]/30
+              tracking-[0.25em]
+              text-[#F6F0E5]/40
             "
           >
-            <span className="h-px w-8 bg-[#F6F0E5]/20" />
+            <span className="h-px w-8 bg-[#F6F0E5]/25" />
 
-            Hecho para celebrar
+            Momentos para recordar
 
-            <span className="h-px w-8 bg-[#F6F0E5]/20" />
-          </motion.div>
-        </motion.div>
-
-        {/* ================= COMPOSICIÓN VISUAL ================= */}
-
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 30,
-            scale: 0.94,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-            scale: 1,
-          }}
-          transition={{
-            delay: 0.35,
-            duration: 1,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="
-            relative
-            mt-6
-            flex
-            w-full
-            max-w-[390px]
-            items-center
-            justify-center
-            sm:mt-8
-            lg:mt-5
-          "
-        >
-
-          {/* Glow principal */}
-
-          <motion.div
-            animate={{
-              scale: [1, 1.08, 1],
-              opacity: [0.2, 0.32, 0.2],
-            }}
-            transition={{
-              duration: 7,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="
-              absolute
-              h-[300px]
-              w-[300px]
-              rounded-full
-              bg-[#C8A45D]
-              blur-[110px]
-            "
-          />
-
-          {/* CÍRCULO CENTRAL */}
-
-          <motion.div
-            animate={{
-              y: [-6, 6, -6],
-              rotate: [-1, 1, -1],
-            }}
-            transition={{
-              duration: 7,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="
-              relative
-              flex
-              aspect-square
-              w-[min(72vw,340px)]
-              items-center
-              justify-center
-            "
-          >
-
-            {/* Anillo */}
-
-            <div
-              className="
-                absolute
-                inset-0
-                rounded-full
-                border
-                border-[#E7D8B8]/15
-              "
-            />
-
-            <div
-              className="
-                absolute
-                inset-[7%]
-                rounded-full
-                border
-                border-[#C8A45D]/20
-              "
-            />
-
-            {/* Fondo */}
-
-            <div
-              className="
-                absolute
-                inset-[13%]
-                rounded-full
-                bg-gradient-to-br
-                from-[#1D4A3B]
-                via-[#12352B]
-                to-[#7A2631]
-                shadow-[0_30px_100px_rgba(0,0,0,0.3)]
-              "
-            />
-
-            {/* Adorno principal */}
-
-            <motion.div
-              animate={{
-                rotate: [0, 3, 0, -3, 0],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="
-                relative
-                z-10
-                flex
-                h-[58%]
-                w-[58%]
-                items-center
-                justify-center
-              "
-            >
-
-              <div
-                className="
-                  absolute
-                  inset-[10%]
-                  rounded-full
-                  border-[1.5px]
-                  border-[#C8A45D]/60
-                "
-              />
-
-              <div
-                className="
-                  absolute
-                  inset-[18%]
-                  rounded-full
-                  bg-[#F6F0E5]/[0.04]
-                  backdrop-blur-sm
-                "
-              />
-
-              <div className="relative text-center">
-
-                <div
-                  className="
-                    text-6xl
-                    leading-none
-                    text-[#C8A45D]
-                    drop-shadow-[0_10px_25px_rgba(200,164,93,0.25)]
-                    sm:text-7xl
-                  "
-                >
-                  ✦
-                </div>
-
-                <p
-                  className="
-                    mt-2
-                    text-[9px]
-                    font-medium
-                    uppercase
-                    tracking-[0.35em]
-                    text-[#E7D8B8]/70
-                  "
-                >
-                  Christmas
-                </p>
-
-              </div>
-            </motion.div>
-
-            {/* ORNAMENTO ROJO */}
-
-            <motion.div
-              animate={{
-                y: [0, -10, 0],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="
-                absolute
-                right-[10%]
-                top-[19%]
-                h-9
-                w-9
-                rounded-full
-                border
-                border-[#C8A45D]/50
-                bg-[#7A2631]
-                shadow-[0_15px_35px_rgba(0,0,0,0.2)]
-              "
-            />
-
-            {/* ORNAMENTO CHAMPAGNE */}
-
-            <motion.div
-              animate={{
-                y: [0, 9, 0],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 0.5,
-              }}
-              className="
-                absolute
-                bottom-[18%]
-                left-[9%]
-                h-7
-                w-7
-                rounded-full
-                border
-                border-[#C8A45D]/50
-                bg-[#E7D8B8]
-              "
-            />
-
-            {/* ESTRELLA */}
-
-            <motion.div
-              animate={{
-                rotate: [0, 12, 0],
-                scale: [1, 1.1, 1],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="
-                absolute
-                left-[5%]
-                top-[27%]
-                text-[#C8A45D]
-              "
-            >
-              <Star
-                size={23}
-                fill="currentColor"
-              />
-            </motion.div>
-
-            {/* SPARKLE */}
-
-            <motion.div
-              animate={{
-                rotate: [0, -10, 0],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="
-                absolute
-                bottom-[28%]
-                right-[4%]
-                text-[#E7D8B8]/70
-              "
-            >
-              <Sparkles size={21} />
-            </motion.div>
-
+            <span className="h-px w-8 bg-[#F6F0E5]/25" />
           </motion.div>
         </motion.div>
       </div>
 
-      {/* INDICADOR SCROLL */}
+      {/* ================= SCROLL ================= */}
 
       <motion.div
         initial={{
@@ -711,11 +399,11 @@ export default function Hero() {
           text-[9px]
           uppercase
           tracking-[0.25em]
-          text-[#F6F0E5]/30
+          text-[#F6F0E5]/35
           lg:flex
         "
       >
-        <span className="h-7 w-px bg-[#F6F0E5]/20" />
+        <span className="h-7 w-px bg-[#F6F0E5]/25" />
 
         Descubre
       </motion.div>
