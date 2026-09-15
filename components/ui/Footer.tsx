@@ -32,12 +32,57 @@ const links = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#171714] px-6 pb-6 pt-20 text-[#F6F0E5] sm:px-8 lg:px-10">
-      <div className="mx-auto max-w-7xl">
+    <footer
+      className="
+        relative
+        overflow-hidden
+        bg-[#081510]
+        px-6
+        pb-5
+        pt-12
+        text-[#F6F0E5]
+        sm:px-8
+        lg:px-10
+      "
+      style={{
+        backgroundImage: "url('/images/fondo.jpg')",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* CAPA OSCURA */}
+      <div className="pointer-events-none absolute inset-0 bg-[#081510]/80" />
+
+      {/* GLOW SUTIL */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -right-40
+          -top-40
+          h-[450px]
+          w-[450px]
+          rounded-full
+          bg-[#C8A45D]/5
+          blur-[120px]
+        "
+      />
+
+      <div className="relative z-10 mx-auto max-w-7xl">
 
         {/* ================= TOP ================= */}
 
-        <div className="grid gap-16 border-b border-[#F6F0E5]/10 pb-16 lg:grid-cols-[1.5fr_1fr_1fr]">
+        <div
+          className="
+            grid
+            gap-10
+            border-b
+            border-[#F6F0E5]/10
+            pb-10
+            lg:grid-cols-[1.5fr_1fr_1fr]
+          "
+        >
 
           {/* BRAND */}
 
@@ -46,7 +91,7 @@ export default function Footer() {
               href="#"
               className="inline-flex items-center gap-2"
             >
-              <span className="text-xl font-semibold tracking-[-0.04em]">
+              <span className="text-lg font-semibold tracking-[-0.04em]">
                 NAVIDAD
               </span>
 
@@ -55,7 +100,7 @@ export default function Footer() {
               </span>
             </a>
 
-            <p className="mt-6 max-w-sm text-sm leading-6 text-[#F6F0E5]/45">
+            <p className="mt-4 max-w-sm text-xs leading-5 text-[#F6F0E5]/50">
               Detalles que hacen especial la Navidad.
               Adornos, personajes y regalos para celebrar
               con intención.
@@ -64,17 +109,17 @@ export default function Footer() {
             <a
               href="mailto:hola@navidad.com"
               className="
-                mt-7
+                mt-4
                 inline-flex
                 items-center
                 gap-2
-                text-sm
+                text-xs
                 text-[#E7D8B8]
                 transition-colors
                 hover:text-white
               "
             >
-              <Mail size={16} />
+              <Mail size={14} />
 
               hola@navidad.com
             </a>
@@ -84,18 +129,27 @@ export default function Footer() {
 
           {links.map((group) => (
             <div key={group.title}>
-              <p className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#C8A45D]">
+              <p
+                className="
+                  mb-4
+                  text-[10px]
+                  font-semibold
+                  uppercase
+                  tracking-[0.2em]
+                  text-[#C8A45D]
+                "
+              >
                 {group.title}
               </p>
 
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-2">
                 {group.items.map((item) => (
                   <a
                     key={item.label}
                     href={item.href}
                     className="
                       w-fit
-                      text-sm
+                      text-xs
                       text-[#F6F0E5]/45
                       transition-colors
                       hover:text-[#F6F0E5]
@@ -111,9 +165,19 @@ export default function Footer() {
 
         {/* ================= BOTTOM ================= */}
 
-        <div className="flex flex-col justify-between gap-6 py-7 sm:flex-row sm:items-center">
+        <div
+          className="
+            flex
+            flex-col
+            justify-between
+            gap-5
+            py-5
+            sm:flex-row
+            sm:items-center
+          "
+        >
 
-          <p className="text-xs text-[#F6F0E5]/30">
+          <p className="text-[10px] text-[#F6F0E5]/30">
             © 2026 Navidad. Todos los derechos reservados.
           </p>
 
@@ -129,21 +193,23 @@ export default function Footer() {
               aria-label="Instagram"
               className="
                 flex
-                h-10
-                w-10
+                h-9
+                w-9
                 items-center
                 justify-center
                 rounded-full
                 border
                 border-[#F6F0E5]/10
-                text-[#F6F0E5]/50
+                bg-[#081510]/40
+                text-[#F6F0E5]/55
+                backdrop-blur-sm
                 transition-all
                 duration-300
                 hover:border-[#C8A45D]/40
                 hover:text-[#C8A45D]
               "
             >
-              <FaInstagram size={16} />
+              <FaInstagram size={14} />
             </motion.a>
 
             {/* FACEBOOK */}
@@ -156,21 +222,23 @@ export default function Footer() {
               aria-label="Facebook"
               className="
                 flex
-                h-10
-                w-10
+                h-9
+                w-9
                 items-center
                 justify-center
                 rounded-full
                 border
                 border-[#F6F0E5]/10
-                text-[#F6F0E5]/50
+                bg-[#081510]/40
+                text-[#F6F0E5]/55
+                backdrop-blur-sm
                 transition-all
                 duration-300
                 hover:border-[#C8A45D]/40
                 hover:text-[#C8A45D]
               "
             >
-              <FaFacebookF size={15} />
+              <FaFacebookF size={13} />
             </motion.a>
 
             {/* BACK TO TOP */}
@@ -183,18 +251,19 @@ export default function Footer() {
               }}
               aria-label="Volver arriba"
               className="
-                ml-2
+                ml-1
                 flex
-                h-10
-                w-10
+                h-9
+                w-9
                 items-center
                 justify-center
                 rounded-full
                 bg-[#C8A45D]
                 text-[#171714]
+                shadow-[0_8px_30px_rgba(200,164,93,0.15)]
               "
             >
-              <ArrowUp size={16} />
+              <ArrowUp size={15} />
             </motion.a>
 
           </div>

@@ -23,7 +23,9 @@ export default function Hero() {
       {/* ================= FONDOS ================= */}
 
       <div className="pointer-events-none absolute inset-0 -z-20 overflow-hidden">
+
         {/* Glow superior */}
+
         <motion.div
           animate={{
             scale: [1, 1.12, 1],
@@ -47,6 +49,7 @@ export default function Hero() {
         />
 
         {/* Glow rojo */}
+
         <motion.div
           animate={{
             scale: [1, 1.18, 1],
@@ -70,6 +73,7 @@ export default function Hero() {
         />
 
         {/* Textura sutil */}
+
         <div
           className="
             absolute
@@ -96,7 +100,12 @@ export default function Hero() {
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="pointer-events-none absolute left-[8%] top-[22%]"
+        className="
+          pointer-events-none
+          absolute
+          left-[8%]
+          top-[22%]
+        "
       >
         <Star
           size={13}
@@ -116,7 +125,12 @@ export default function Hero() {
           ease: "easeInOut",
           delay: 1,
         }}
-        className="pointer-events-none absolute left-[46%] top-[18%]"
+        className="
+          pointer-events-none
+          absolute
+          left-[46%]
+          top-[18%]
+        "
       >
         <Star
           size={9}
@@ -136,7 +150,12 @@ export default function Hero() {
           ease: "easeInOut",
           delay: 0.5,
         }}
-        className="pointer-events-none absolute right-[12%] top-[35%]"
+        className="
+          pointer-events-none
+          absolute
+          right-[12%]
+          top-[35%]
+        "
       >
         <Star
           size={11}
@@ -150,20 +169,21 @@ export default function Hero() {
       <div
         className="
           mx-auto
-          grid
+          flex
           min-h-screen
           max-w-7xl
+          flex-col
           items-center
-          gap-16
+          justify-center
           px-6
-          pb-20
-          pt-32
+          pb-16
+          pt-28
+          text-center
           sm:px-8
-          lg:grid-cols-[1.05fr_0.95fr]
           lg:px-10
-          lg:pt-28
         "
       >
+
         {/* ================= TEXTO ================= */}
 
         <motion.div
@@ -179,8 +199,16 @@ export default function Hero() {
             duration: 0.9,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className="relative z-10"
+          className="
+            relative
+            z-10
+            flex
+            max-w-4xl
+            flex-col
+            items-center
+          "
         >
+
           {/* LABEL */}
 
           <motion.div
@@ -197,7 +225,7 @@ export default function Hero() {
               duration: 0.6,
             }}
             className="
-              mb-7
+              mb-6
               inline-flex
               items-center
               gap-2
@@ -207,7 +235,7 @@ export default function Hero() {
               bg-[#F6F0E5]/[0.05]
               px-4
               py-2
-              text-[11px]
+              text-[10px]
               font-medium
               uppercase
               tracking-[0.22em]
@@ -240,11 +268,11 @@ export default function Hero() {
               ease: [0.22, 1, 0.36, 1],
             }}
             className="
-              max-w-3xl
-              text-[clamp(3.5rem,7vw,6.8rem)]
+              max-w-4xl
+              text-[clamp(3rem,6vw,5.6rem)]
               font-medium
-              leading-[0.91]
-              tracking-[-0.065em]
+              leading-[0.94]
+              tracking-[-0.06em]
             "
           >
             Una Navidad
@@ -271,13 +299,13 @@ export default function Hero() {
               duration: 0.7,
             }}
             className="
-              mt-8
-              max-w-xl
-              text-base
-              leading-7
-              text-[#F6F0E5]/65
-              sm:text-lg
-              sm:leading-8
+              mt-7
+              max-w-2xl
+              text-sm
+              leading-6
+              text-[#F6F0E5]/60
+              sm:text-base
+              sm:leading-7
             "
           >
             Adornos, personajes y detalles especiales
@@ -301,7 +329,7 @@ export default function Hero() {
               delay: 0.55,
               duration: 0.7,
             }}
-            className="mt-10"
+            className="mt-8"
           >
             <motion.a
               href="#productos"
@@ -318,8 +346,8 @@ export default function Hero() {
                 gap-3
                 rounded-full
                 bg-[#C8A45D]
-                px-7
-                py-4
+                px-6
+                py-3.5
                 text-sm
                 font-semibold
                 text-[#171714]
@@ -357,19 +385,21 @@ export default function Hero() {
               duration: 0.8,
             }}
             className="
-              mt-12
+              mt-9
               flex
               items-center
               gap-4
-              text-xs
+              text-[10px]
               uppercase
               tracking-[0.18em]
-              text-[#F6F0E5]/35
+              text-[#F6F0E5]/30
             "
           >
-            <span className="h-px w-10 bg-[#F6F0E5]/20" />
+            <span className="h-px w-8 bg-[#F6F0E5]/20" />
 
             Hecho para celebrar
+
+            <span className="h-px w-8 bg-[#F6F0E5]/20" />
           </motion.div>
         </motion.div>
 
@@ -378,35 +408,38 @@ export default function Hero() {
         <motion.div
           initial={{
             opacity: 0,
-            x: 50,
+            y: 30,
             scale: 0.94,
           }}
           animate={{
             opacity: 1,
-            x: 0,
+            y: 0,
             scale: 1,
           }}
           transition={{
-            delay: 0.25,
+            delay: 0.35,
             duration: 1,
             ease: [0.22, 1, 0.36, 1],
           }}
           className="
             relative
-            mx-auto
+            mt-6
             flex
             w-full
-            max-w-[560px]
+            max-w-[390px]
             items-center
             justify-center
+            sm:mt-8
+            lg:mt-5
           "
         >
+
           {/* Glow principal */}
 
           <motion.div
             animate={{
               scale: [1, 1.08, 1],
-              opacity: [0.25, 0.38, 0.25],
+              opacity: [0.2, 0.32, 0.2],
             }}
             transition={{
               duration: 7,
@@ -415,11 +448,11 @@ export default function Hero() {
             }}
             className="
               absolute
-              h-[360px]
-              w-[360px]
+              h-[300px]
+              w-[300px]
               rounded-full
               bg-[#C8A45D]
-              blur-[120px]
+              blur-[110px]
             "
           />
 
@@ -427,7 +460,7 @@ export default function Hero() {
 
           <motion.div
             animate={{
-              y: [-8, 8, -8],
+              y: [-6, 6, -6],
               rotate: [-1, 1, -1],
             }}
             transition={{
@@ -439,11 +472,12 @@ export default function Hero() {
               relative
               flex
               aspect-square
-              w-[min(82vw,470px)]
+              w-[min(72vw,340px)]
               items-center
               justify-center
             "
           >
+
             {/* Anillo */}
 
             <div
@@ -502,6 +536,7 @@ export default function Hero() {
                 justify-center
               "
             >
+
               <div
                 className="
                   absolute
@@ -523,13 +558,14 @@ export default function Hero() {
               />
 
               <div className="relative text-center">
+
                 <div
                   className="
-                    text-7xl
+                    text-6xl
                     leading-none
                     text-[#C8A45D]
                     drop-shadow-[0_10px_25px_rgba(200,164,93,0.25)]
-                    sm:text-8xl
+                    sm:text-7xl
                   "
                 >
                   ✦
@@ -537,8 +573,8 @@ export default function Hero() {
 
                 <p
                   className="
-                    mt-3
-                    text-[10px]
+                    mt-2
+                    text-[9px]
                     font-medium
                     uppercase
                     tracking-[0.35em]
@@ -547,14 +583,15 @@ export default function Hero() {
                 >
                   Christmas
                 </p>
+
               </div>
             </motion.div>
 
-            {/* PEQUEÑOS ORNAMENTOS */}
+            {/* ORNAMENTO ROJO */}
 
             <motion.div
               animate={{
-                y: [0, -12, 0],
+                y: [0, -10, 0],
               }}
               transition={{
                 duration: 4,
@@ -565,8 +602,8 @@ export default function Hero() {
                 absolute
                 right-[10%]
                 top-[19%]
-                h-11
-                w-11
+                h-9
+                w-9
                 rounded-full
                 border
                 border-[#C8A45D]/50
@@ -575,9 +612,11 @@ export default function Hero() {
               "
             />
 
+            {/* ORNAMENTO CHAMPAGNE */}
+
             <motion.div
               animate={{
-                y: [0, 10, 0],
+                y: [0, 9, 0],
               }}
               transition={{
                 duration: 5,
@@ -589,8 +628,8 @@ export default function Hero() {
                 absolute
                 bottom-[18%]
                 left-[9%]
-                h-8
-                w-8
+                h-7
+                w-7
                 rounded-full
                 border
                 border-[#C8A45D]/50
@@ -598,7 +637,7 @@ export default function Hero() {
               "
             />
 
-            {/* Estrellas */}
+            {/* ESTRELLA */}
 
             <motion.div
               animate={{
@@ -618,10 +657,12 @@ export default function Hero() {
               "
             >
               <Star
-                size={28}
+                size={23}
                 fill="currentColor"
               />
             </motion.div>
+
+            {/* SPARKLE */}
 
             <motion.div
               animate={{
@@ -639,8 +680,9 @@ export default function Hero() {
                 text-[#E7D8B8]/70
               "
             >
-              <Sparkles size={25} />
+              <Sparkles size={21} />
             </motion.div>
+
           </motion.div>
         </motion.div>
       </div>
@@ -660,20 +702,21 @@ export default function Hero() {
         }}
         className="
           absolute
-          bottom-7
+          bottom-5
           left-1/2
           hidden
           -translate-x-1/2
           items-center
           gap-3
-          text-[10px]
+          text-[9px]
           uppercase
           tracking-[0.25em]
           text-[#F6F0E5]/30
           lg:flex
         "
       >
-        <span className="h-8 w-px bg-[#F6F0E5]/20" />
+        <span className="h-7 w-px bg-[#F6F0E5]/20" />
+
         Descubre
       </motion.div>
     </section>
