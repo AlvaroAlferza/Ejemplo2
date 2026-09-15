@@ -83,13 +83,80 @@ export default function Reviews() {
   return (
     <section
       id="reseñas"
-      className="relative overflow-hidden bg-[#0B211B] px-6 py-20 sm:px-8 lg:px-10 lg:py-24"
+      className="relative isolate overflow-hidden bg-[#0B211B] px-6 py-20 sm:px-8 lg:px-10 lg:py-24"
     >
-      {/* GLOW */}
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-[#C8A45D]/5 blur-[120px]" />
+      {/* =========================================================
+          VIDEO DE FONDO — HD / SIN BLUR
+      ========================================================= */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        disablePictureInPicture
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          z-0
+          h-full
+          w-full
+          object-cover
+          object-center
+        "
+        style={{
+          imageRendering: "auto",
+        }}
+      >
+        <source src="/videos/navidad6.mp4" type="video/mp4" />
+      </video>
+
+      {/* =========================================================
+          CAPA OSCURA MUY LIGERA
+          Antes: /80
+          Ahora: /25
+      ========================================================= */}
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[#07140F]/25" />
+
+      {/* =========================================================
+          GRADIENTE PARA QUE EL TEXTO SEA LEGIBLE
+          Sin tapar el video
+      ========================================================= */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          z-[2]
+          bg-gradient-to-b
+          from-[#07140F]/35
+          via-[#0B211B]/15
+          to-[#07140F]/45
+        "
+      />
+
+      {/* =========================================================
+          GLOW SUTIL
+      ========================================================= */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-0
+          z-[3]
+          h-[400px]
+          w-[600px]
+          -translate-x-1/2
+          rounded-full
+          bg-[#C8A45D]/5
+          blur-[120px]
+        "
+      />
 
       {/* DECORACIÓN */}
-      <div className="pointer-events-none absolute right-8 top-8 hidden opacity-20 lg:block">
+      <div className="pointer-events-none absolute right-8 top-8 z-[4] hidden opacity-30 lg:block">
         <Sparkles
           size={70}
           strokeWidth={1}
@@ -97,8 +164,11 @@ export default function Reviews() {
         />
       </div>
 
-      <div className="relative mx-auto max-w-5xl">
-        {/* HEADER CENTRADO */}
+      {/* =========================================================
+          CONTENIDO
+      ========================================================= */}
+      <div className="relative z-10 mx-auto max-w-5xl">
+        {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -120,13 +190,15 @@ export default function Reviews() {
             La Navidad también se recuerda por los detalles.
           </h2>
 
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-[#B9B1A2]">
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-[#E1DBCF]">
             Historias de personas que encontraron ese detalle especial
             para hacer su Navidad diferente.
           </p>
         </motion.div>
 
-        {/* RESEÑA */}
+        {/* =========================================================
+            RESEÑA PRINCIPAL
+        ========================================================= */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -134,9 +206,11 @@ export default function Reviews() {
           transition={{ duration: 0.8 }}
           className="mx-auto max-w-4xl"
         >
-          <div className="relative overflow-hidden rounded-[1.75rem] border border-[#F6F0E5]/10 bg-[#12352B]/70 shadow-2xl backdrop-blur-xl">
+          <div className="relative overflow-hidden rounded-[1.75rem] border border-[#F6F0E5]/15 bg-[#12352B]/80 shadow-2xl backdrop-blur-sm">
             <div className="grid min-h-[390px] grid-cols-1 lg:grid-cols-[40%_60%]">
-              {/* ================= IMAGEN 40% ================= */}
+              {/* =================================================
+                  IMAGEN PRODUCTO
+              ================================================= */}
               <div className="relative min-h-[280px] overflow-hidden bg-[#081510] lg:min-h-0">
                 <AnimatePresence mode="wait">
                   <motion.img
@@ -166,21 +240,20 @@ export default function Reviews() {
                   />
                 </AnimatePresence>
 
-                {/* OVERLAY */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#081510]/80 via-[#081510]/10 to-transparent" />
 
-                {/* ETIQUETA */}
                 <div className="absolute bottom-5 left-5">
                   <span className="rounded-full border border-[#F6F0E5]/15 bg-[#081510]/60 px-3 py-1.5 text-[11px] text-[#F6F0E5] backdrop-blur-md">
                     {currentReview.product}
                   </span>
                 </div>
 
-                {/* DETALLE DORADO */}
                 <div className="absolute left-5 top-5 h-8 w-8 rounded-full border border-[#C8A45D]/30" />
               </div>
 
-              {/* ================= INFO 60% ================= */}
+              {/* =================================================
+                  INFO
+              ================================================= */}
               <div className="relative flex flex-col justify-between p-6 sm:p-8 lg:p-10">
                 <Quote
                   size={80}
@@ -191,7 +264,6 @@ export default function Reviews() {
                 {/* PERFIL */}
                 <div className="relative mb-7 flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3.5">
-                    {/* FOTO CLIENTE */}
                     <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border border-[#C8A45D]/30 bg-[#7A2631]">
                       {currentReview.image ? (
                         <img
@@ -221,7 +293,6 @@ export default function Reviews() {
                     </div>
                   </div>
 
-                  {/* ESTRELLAS */}
                   <div className="hidden items-center gap-1 sm:flex">
                     {Array.from({ length: 5 }).map((_, index) => (
                       <Star
@@ -294,7 +365,6 @@ export default function Reviews() {
 
                 {/* CONTROLES */}
                 <div className="mt-7 flex items-center justify-between border-t border-[#F6F0E5]/10 pt-5">
-                  {/* INDICADORES */}
                   <div className="flex items-center gap-1.5">
                     {reviews.map((review, index) => (
                       <button
@@ -318,7 +388,6 @@ export default function Reviews() {
                     ))}
                   </div>
 
-                  {/* FLECHAS */}
                   <div className="flex items-center gap-2">
                     <motion.button
                       type="button"
@@ -348,7 +417,9 @@ export default function Reviews() {
           </div>
         </motion.div>
 
-        {/* MINI RESEÑAS */}
+        {/* =========================================================
+            MINI RESEÑAS
+        ========================================================= */}
         <div className="mx-auto mt-5 grid max-w-4xl grid-cols-3 gap-3">
           {reviews.slice(0, 3).map((review, index) => (
             <motion.button
@@ -361,8 +432,8 @@ export default function Reviews() {
               whileHover={{ y: -2 }}
               className={`rounded-xl border p-3 text-left transition-all ${
                 active === index
-                  ? "border-[#C8A45D]/30 bg-[#12352B]"
-                  : "border-[#F6F0E5]/5 bg-[#12352B]/40 hover:border-[#F6F0E5]/10"
+                  ? "border-[#C8A45D]/30 bg-[#12352B]/90"
+                  : "border-[#F6F0E5]/5 bg-[#12352B]/60 hover:border-[#F6F0E5]/10"
               }`}
             >
               <div className="flex items-center gap-2.5">
