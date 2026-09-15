@@ -71,7 +71,7 @@ export default function FeaturedProducts() {
           </p>
 
           <motion.a
-            href="#todos-los-productos"
+            href="/catalogo"
             whileHover={{ x: 4 }}
             className="
               mt-5

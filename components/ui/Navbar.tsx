@@ -13,19 +13,19 @@ import { useState } from "react";
 const navigation = [
   {
     label: "Inicio",
-    href: "#",
+    href: "/",
   },
   {
     label: "Colecciones",
-    href: "#colecciones",
+    href: "/#colecciones",
   },
   {
     label: "Productos",
-    href: "#productos",
+    href: "/#productos",
   },
   {
     label: "Nosotros",
-    href: "#nosotros",
+    href: "/#nosotros",
   },
 ];
 

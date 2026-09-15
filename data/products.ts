@@ -66,4 +66,99 @@ export const products: Product[] = [
 
     featured: true,
   },
+
+  {
+    id: "peluche-navideno",
+    name: "Peluche navideño",
+    category: "Peluches",
+    description:
+      "Un detalle cálido para complementar la decoración de Navidad.",
+    price: 79,
+
+    image: "/images/adornos2.jpg",
+
+    images: [
+      "/images/adornos2.jpg",
+      "/images/adornos3.jpg",
+      "/images/adornos4.jpg",
+    ],
+
+    featured: true,
+  },
+
+  {
+    id: "peluche-navideno",
+    name: "Peluche navideño",
+    category: "Peluches",
+    description:
+      "Un detalle cálido para complementar la decoración de Navidad.",
+    price: 79,
+
+    image: "/images/adornos2.jpg",
+
+    images: [
+      "/images/adornos2.jpg",
+      "/images/adornos3.jpg",
+      "/images/adornos4.jpg",
+    ],
+
+    featured: true,
+  },
+
+  {
+    id: "peluche-navideno",
+    name: "Peluche navideño",
+    category: "Peluches",
+    description:
+      "Un detalle cálido para complementar la decoración de Navidad.",
+    price: 79,
+
+    image: "/images/adornos2.jpg",
+
+    images: [
+      "/images/adornos2.jpg",
+      "/images/adornos3.jpg",
+      "/images/adornos4.jpg",
+    ],
+
+    featured: true,
+  },
+
+  {
+    id: "peluche-navideno",
+    name: "Peluche navideño",
+    category: "Peluches",
+    description:
+      "Un detalle cálido para complementar la decoración de Navidad.",
+    price: 79,
+
+    image: "/images/adornos2.jpg",
+
+    images: [
+      "/images/adornos2.jpg",
+      "/images/adornos3.jpg",
+      "/images/adornos4.jpg",
+    ],
+
+    featured: true,
+  },
+
+  {
+    id: "peluche-navideno",
+    name: "Peluche navideño",
+    category: "Peluches",
+    description:
+      "Un detalle cálido para complementar la decoración de Navidad.",
+    price: 79,
+
+    image: "/images/adornos2.jpg",
+
+    images: [
+      "/images/adornos2.jpg",
+      "/images/adornos3.jpg",
+      "/images/adornos4.jpg",
+    ],
+
+    featured: true,
+  },
 ];
