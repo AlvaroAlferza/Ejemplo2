@@ -8,166 +8,125 @@ export default function EditorialBanner() {
     <section
       className="
         relative
+        isolate
         overflow-hidden
         px-6
-        py-10
+        py-8
+        text-[#F6F0E5]
         sm:px-8
         lg:px-10
+        lg:py-10
       "
-      style={{
-        backgroundImage: "url('/images/fondo2.jpg')",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
     >
-      {/* ================= CAPA SUTIL DEL FONDO ================= */}
+
+      {/* =====================================================
+          VIDEO — FONDO DE TODA LA SECCIÓN
+      ===================================================== */}
+
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          -z-20
+          h-full
+          w-full
+          object-cover
+        "
+      >
+        <source
+          src="/images/navidad2.mp4"
+          type="video/mp4"
+        />
+      </video>
+
+      {/* =====================================================
+          OVERLAY
+      ===================================================== */}
 
       <div
         className="
           pointer-events-none
           absolute
           inset-0
-          bg-[#F6F0E5]/10
+          -z-10
+          bg-[#081510]/35
         "
       />
 
-      {/* ================= CONTENEDOR ================= */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          -z-10
+          bg-gradient-to-b
+          from-[#081510]/15
+          via-[#081510]/25
+          to-[#081510]/60
+        "
+      />
+
+      {/* =====================================================
+          VIÑETA
+      ===================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          -z-10
+          bg-[radial-gradient(circle_at_center,transparent_15%,rgba(8,21,16,0.4)_100%)]
+        "
+      />
+
+      {/* =====================================================
+          GLOW DORADO
+      ===================================================== */}
 
       <motion.div
-        initial={{
-          opacity: 0,
-          scale: 0.98,
-        }}
-        whileInView={{
-          opacity: 1,
-          scale: 1,
-        }}
-        viewport={{
-          once: true,
-          amount: 0.2,
+        animate={{
+          scale: [1, 1.08, 1],
+          opacity: [0.06, 0.14, 0.06],
         }}
         transition={{
-          duration: 0.8,
+          duration: 7,
+          repeat: Infinity,
+          ease: "easeInOut",
         }}
         className="
-          relative
-          z-10
-          mx-auto
-          min-h-[400px]
-          max-w-7xl
-          overflow-hidden
-          rounded-[2rem]
-          bg-[#7A2631]
-          text-[#F6F0E5]
-          shadow-[0_25px_70px_rgba(23,23,20,0.15)]
+          pointer-events-none
+          absolute
+          -right-32
+          -top-32
+          -z-10
+          h-[350px]
+          w-[350px]
+          rounded-full
+          bg-[#C8A45D]
+          blur-[110px]
         "
-      >
-        {/* ================================================== */}
-        {/* VIDEO DENTRO DEL BOX */}
-        {/* ================================================== */}
+      />
 
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          className="
-            absolute
-            inset-0
-            z-0
-            h-full
-            w-full
-            object-cover
-          "
-        >
-          <source
-            src="/images/navidad2.mp4"
-            type="video/mp4"
-          />
-        </video>
+      {/* =====================================================
+          CONTENIDO
+      ===================================================== */}
 
-        {/* ================= CAPA OSCURA DEL VIDEO ================= */}
+      <div className="relative z-10 mx-auto max-w-7xl">
 
-        <div
-          className="
-            absolute
-            inset-0
-            z-10
-            bg-[#081510]/45
-          "
-        />
-
-        <div
-          className="
-            absolute
-            inset-0
-            z-10
-            bg-gradient-to-b
-            from-[#081510]/15
-            via-[#081510]/30
-            to-[#081510]/65
-          "
-        />
-
-        {/* ================= GLOW DORADO ================= */}
+        {/* ===================================================
+            DECORACIÓN
+        =================================================== */}
 
         <motion.div
           animate={{
-            scale: [1, 1.08, 1],
-            opacity: [0.12, 0.22, 0.12],
-          }}
-          transition={{
-            duration: 7,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="
-            pointer-events-none
-            absolute
-            -right-32
-            -top-32
-            z-10
-            h-[400px]
-            w-[400px]
-            rounded-full
-            bg-[#C8A45D]
-            blur-[120px]
-          "
-        />
-
-        {/* ================= GLOW VERDE ================= */}
-
-        <motion.div
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.08, 0.16, 0.08],
-          }}
-          transition={{
-            duration: 9,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="
-            pointer-events-none
-            absolute
-            -bottom-40
-            left-1/3
-            z-10
-            h-[400px]
-            w-[400px]
-            rounded-full
-            bg-[#12352B]
-            blur-[130px]
-          "
-        />
-
-        {/* ================= DECORACIÓN ================= */}
-
-        <motion.div
-          animate={{
-            y: [0, -7, 0],
+            y: [0, -5, 0],
             rotate: [0, 5, 0],
           }}
           transition={{
@@ -178,18 +137,17 @@ export default function EditorialBanner() {
           className="
             pointer-events-none
             absolute
-            right-[10%]
-            top-[15%]
-            z-20
-            text-[#C8A45D]/50
+            right-[7%]
+            top-[10%]
+            text-[#C8A45D]/65
           "
         >
-          <Sparkles size={28} />
+          <Sparkles size={24} />
         </motion.div>
 
         <motion.div
           animate={{
-            y: [0, 6, 0],
+            y: [0, 5, 0],
             opacity: [0.2, 0.5, 0.2],
           }}
           transition={{
@@ -200,29 +158,27 @@ export default function EditorialBanner() {
           className="
             pointer-events-none
             absolute
-            bottom-[18%]
-            right-[25%]
-            z-20
+            bottom-[12%]
+            right-[20%]
             text-[#E7D8B8]/40
           "
         >
-          <Sparkles size={18} />
+          <Sparkles size={15} />
         </motion.div>
 
-        {/* CIRCULOS */}
+        {/* CÍRCULOS */}
 
         <div
           className="
             pointer-events-none
             absolute
             -right-20
-            -bottom-28
-            z-20
-            h-[300px]
-            w-[300px]
+            -bottom-24
+            h-[260px]
+            w-[260px]
             rounded-full
             border
-            border-[#E7D8B8]/15
+            border-[#E7D8B8]/12
           "
         />
 
@@ -231,41 +187,56 @@ export default function EditorialBanner() {
             pointer-events-none
             absolute
             -right-10
-            -top-20
-            z-20
-            h-[220px]
-            w-[220px]
+            -top-16
+            h-[180px]
+            w-[180px]
             rounded-full
             border
-            border-[#C8A45D]/20
+            border-[#C8A45D]/15
           "
         />
 
-        {/* ================================================== */}
-        {/* CONTENIDO */}
-        {/* ================================================== */}
+        {/* ===================================================
+            BLOQUE CENTRAL
+        =================================================== */}
 
-        <div
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.2,
+          }}
+          transition={{
+            duration: 0.75,
+            ease: [0.22, 1, 0.36, 1],
+          }}
           className="
-            relative
-            z-30
             flex
-            min-h-[400px]
+            min-h-[300px]
             flex-col
             items-center
             justify-center
-            px-8
+            px-6
             py-12
             text-center
-            sm:px-14
+            sm:min-h-[320px]
+            sm:px-10
           "
         >
+
           {/* LABEL */}
 
           <motion.p
             initial={{
               opacity: 0,
-              y: 12,
+              y: 10,
             }}
             whileInView={{
               opacity: 1,
@@ -276,15 +247,16 @@ export default function EditorialBanner() {
             }}
             transition={{
               delay: 0.1,
-              duration: 0.6,
+              duration: 0.5,
             }}
             className="
-              mb-4
-              text-[10px]
+              mb-3
+              text-[9px]
               font-semibold
               uppercase
               tracking-[0.25em]
               text-[#E7D8B8]
+              sm:text-[10px]
             "
           >
             Para regalar
@@ -295,7 +267,7 @@ export default function EditorialBanner() {
           <motion.h2
             initial={{
               opacity: 0,
-              y: 18,
+              y: 14,
             }}
             whileInView={{
               opacity: 1,
@@ -305,32 +277,33 @@ export default function EditorialBanner() {
               once: true,
             }}
             transition={{
-              delay: 0.2,
-              duration: 0.8,
+              delay: 0.18,
+              duration: 0.7,
             }}
             className="
               max-w-2xl
               text-4xl
               font-medium
-              leading-[0.95]
+              leading-[0.94]
               tracking-[-0.055em]
               sm:text-5xl
-              lg:text-6xl
+              lg:text-[52px]
             "
           >
             Hecho para
             <br />
+
             <span className="text-[#E7D8B8]">
               regalar.
             </span>
           </motion.h2>
 
-          {/* DESCRIPCION */}
+          {/* DESCRIPCIÓN */}
 
           <motion.p
             initial={{
               opacity: 0,
-              y: 12,
+              y: 10,
             }}
             whileInView={{
               opacity: 1,
@@ -340,28 +313,28 @@ export default function EditorialBanner() {
               once: true,
             }}
             transition={{
-              delay: 0.35,
-              duration: 0.7,
+              delay: 0.3,
+              duration: 0.6,
             }}
             className="
-              mt-5
+              mt-4
               max-w-md
-              text-sm
-              leading-6
+              text-[13px]
+              leading-5
               text-[#F6F0E5]/70
-              sm:text-[15px]
+              sm:text-sm
             "
           >
             Porque algunos regalos no se envuelven solamente.
             Se convierten en recuerdos.
           </motion.p>
 
-          {/* BOTON */}
+          {/* BOTÓN */}
 
           <motion.div
             initial={{
               opacity: 0,
-              y: 12,
+              y: 10,
             }}
             whileInView={{
               opacity: 1,
@@ -371,10 +344,10 @@ export default function EditorialBanner() {
               once: true,
             }}
             transition={{
-              delay: 0.5,
-              duration: 0.7,
+              delay: 0.4,
+              duration: 0.6,
             }}
-            className="mt-7"
+            className="mt-5"
           >
             <motion.a
               href="#productos"
@@ -388,21 +361,25 @@ export default function EditorialBanner() {
                 group
                 inline-flex
                 items-center
-                gap-2.5
+                gap-2
                 rounded-full
                 bg-[#F6F0E5]
                 px-5
-                py-3
+                py-2.5
                 text-xs
                 font-semibold
                 text-[#7A2631]
-                shadow-[0_12px_35px_rgba(0,0,0,0.18)]
+                shadow-[0_10px_30px_rgba(0,0,0,0.2)]
+                transition-colors
+                duration-300
+                hover:bg-white
               "
             >
               Descubrir regalos
 
               <ArrowUpRight
-                size={15}
+                size={14}
+                strokeWidth={2}
                 className="
                   transition-transform
                   duration-300
@@ -412,8 +389,9 @@ export default function EditorialBanner() {
               />
             </motion.a>
           </motion.div>
-        </div>
-      </motion.div>
+
+        </motion.div>
+      </div>
     </section>
   );
 }

@@ -48,7 +48,7 @@ export default function Experience() {
         lg:pb-24
       "
       style={{
-        backgroundImage: "url('/images/fondo2.jpg')",
+        backgroundImage: "url('/images/fondo2.png')",
         backgroundRepeat: "no-repeat",
         backgroundSize: "100% auto",
         backgroundPosition: "center top",

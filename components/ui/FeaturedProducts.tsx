@@ -18,16 +18,34 @@ export default function FeaturedProducts() {
     <section
       id="productos"
       className="
-        bg-[#F6F0E5]
+        relative
+        overflow-hidden
         px-6
         pb-20
         pt-4
+        text-[#171714]
         sm:px-8
         lg:px-10
         lg:pb-24
       "
+      style={{
+        backgroundImage: "url('/images/fondo2.png')",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
     >
-      <div className="mx-auto max-w-6xl">
+      {/* CAPA SUAVE PARA MANTENER LEGIBILIDAD */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          bg-[#F6F0E5]/25
+        "
+      />
+
+      <div className="relative z-10 mx-auto max-w-6xl">
 
         {/* HEADER */}
         <motion.div
@@ -425,7 +443,6 @@ function ProductCard({
         "
       >
         <div>
-
           <h3
             className="
               text-base
@@ -447,7 +464,6 @@ function ProductCard({
           >
             {product.description}
           </p>
-
         </div>
 
         <span
@@ -460,7 +476,6 @@ function ProductCard({
         >
           S/ {product.price}
         </span>
-
       </div>
     </motion.article>
   );

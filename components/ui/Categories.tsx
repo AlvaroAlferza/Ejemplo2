@@ -26,7 +26,7 @@ export default function Categories() {
         lg:py-28
       "
       style={{
-        backgroundImage: "url('/images/fondo3.jpg')",
+        backgroundImage: "url('/images/fondo2.png')",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundPosition: "center",

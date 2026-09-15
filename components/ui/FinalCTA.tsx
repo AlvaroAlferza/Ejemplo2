@@ -8,7 +8,126 @@ import {
 
 export default function FinalCTA() {
   return (
-    <section className="bg-[#F6F0E5] px-6 pb-6 pt-3 sm:px-8 lg:px-10">
+    <section
+      id="contacto"
+      className="
+        relative
+        isolate
+        overflow-hidden
+        px-6
+        pb-6
+        pt-3
+        text-[#F6F0E5]
+        sm:px-8
+        lg:px-10
+      "
+    >
+
+      {/* =====================================================
+          VIDEO — FONDO DE TODO EL COMPONENTE
+      ===================================================== */}
+
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          -z-20
+          h-full
+          w-full
+          object-cover
+        "
+      >
+        <source
+          src="/images/navidad3.mp4"
+          type="video/mp4"
+        />
+      </video>
+
+      {/* =====================================================
+          CAPA OSCURA GENERAL
+      ===================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          -z-10
+          bg-[#081510]/45
+        "
+      />
+
+      {/* =====================================================
+          DEGRADADO
+      ===================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          -z-10
+          bg-gradient-to-b
+          from-[#081510]/20
+          via-[#081510]/35
+          to-[#081510]/70
+        "
+      />
+
+      {/* =====================================================
+          VIÑETA
+      ===================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          -z-10
+          bg-[radial-gradient(circle_at_center,transparent_15%,rgba(8,21,16,0.45)_100%)]
+        "
+      />
+
+      {/* =====================================================
+          GLOW DORADO
+      ===================================================== */}
+
+      <motion.div
+        animate={{
+          scale: [1, 1.08, 1],
+          opacity: [0.06, 0.14, 0.06],
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-1/2
+          -z-10
+          h-[350px]
+          w-[350px]
+          -translate-x-1/2
+          -translate-y-1/2
+          rounded-full
+          bg-[#C8A45D]
+          blur-[110px]
+        "
+      />
+
+      {/* =====================================================
+          CONTENIDO
+      ===================================================== */}
+
       <motion.div
         initial={{
           opacity: 0,
@@ -27,82 +146,72 @@ export default function FinalCTA() {
         className="
           relative
           mx-auto
+          flex
+          min-h-[310px]
           max-w-7xl
-          overflow-hidden
-          rounded-[2rem]
-          bg-[#171714]
+          items-center
+          justify-center
           px-6
           py-12
           text-center
-          text-[#F6F0E5]
+          sm:min-h-[330px]
           sm:px-10
           sm:py-14
+          lg:min-h-[350px]
           lg:py-16
         "
       >
-        {/* ================= VIDEO ================= */}
 
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="
-            absolute
-            inset-0
-            h-full
-            w-full
-            object-cover
-          "
-        >
-          <source
-            src="/images/navidad3.mp4"
-            type="video/mp4"
-          />
-        </video>
+        {/* ===================================================
+            DECORACIÓN
+        =================================================== */}
 
-        {/* ================= CAPA OSCURA ================= */}
-
-        <div
-          className="
-            absolute
-            inset-0
-            bg-[#081510]/65
-          "
-        />
-
-        {/* ================= DEGRADADO ================= */}
-
-        <div
-          className="
-            absolute
-            inset-0
-            bg-gradient-to-b
-            from-[#081510]/25
-            via-[#081510]/40
-            to-[#081510]/75
-          "
-        />
-
-        {/* ================= GLOW ================= */}
-
-        <div
+        <motion.div
+          animate={{
+            y: [0, -6, 0],
+            rotate: [0, 5, 0],
+            opacity: [0.35, 0.7, 0.35],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
           className="
             pointer-events-none
             absolute
-            left-1/2
-            top-1/2
-            h-[300px]
-            w-[300px]
-            -translate-x-1/2
-            -translate-y-1/2
-            rounded-full
-            bg-[#C8A45D]/10
-            blur-[100px]
+            right-[8%]
+            top-[12%]
+            text-[#C8A45D]
           "
-        />
+        >
+          <Sparkles size={24} />
+        </motion.div>
 
-        {/* ================= CONTENIDO ================= */}
+        <motion.div
+          animate={{
+            y: [0, 5, 0],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="
+            pointer-events-none
+            absolute
+            bottom-[15%]
+            left-[10%]
+            text-[#E7D8B8]/60
+          "
+        >
+          <Sparkles size={15} />
+        </motion.div>
+
+        {/* ===================================================
+            BLOQUE
+        =================================================== */}
 
         <div className="relative z-10">
 

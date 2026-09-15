@@ -16,10 +16,10 @@ export default function Home() {
       <Hero />
 
       <Categories />
-
+      <EditorialBanner />
       <FeaturedProducts />
 
-      <EditorialBanner />
+     
 
     
 
