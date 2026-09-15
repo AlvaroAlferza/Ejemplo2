@@ -7,6 +7,8 @@ import Craftsmanship from "@/components/ui/Craftsmanship";
 import Experience from "@/components/ui/Experience";
 import FinalCTA from "@/components/ui/FinalCTA";
 import Footer from "@/components/ui/Footer";
+import Reviews from "@/components/ui/Reviews";
+
 
 export default function Home() {
   return (
@@ -22,10 +24,11 @@ export default function Home() {
      
 
     
-
-      <Experience />
-
       <FinalCTA />
+      <Experience />
+      <Reviews />
+
+      
 
       <Footer />
     </main>

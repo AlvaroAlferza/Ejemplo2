@@ -5,10 +5,10 @@ import { ArrowUpRight } from "lucide-react";
 import { categories } from "@/data/categories";
 
 const categoryImages = [
-  "/images/adorno1.jpg",
-  "/images/adorno2.jpg",
-  "/images/adorno3.jpg",
-  "/images/adorno4.jpg",
+  "/images/noel.png",
+  "/images/duende.png",
+  "/images/adornito.png",
+  "/images/oso.png",
 ];
 
 export default function Categories() {
