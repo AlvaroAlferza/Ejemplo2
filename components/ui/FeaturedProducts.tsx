@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import {
   ArrowRight,
   Check,
+  Gift,
   Heart,
   LoaderCircle,
   Mail,
@@ -12,9 +13,11 @@ import {
   Phone,
   Plus,
   ShoppingBag,
+  Star,
   Trash2,
   User,
   X,
+  Sparkles,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
@@ -35,22 +38,81 @@ type FormDataState = {
 const FORMSPREE_ENDPOINT =
   "https://formspree.io/f/mnpnavpa";
 
-export default function FeaturedProducts() {
-  /*
-   * =========================================================
-   * SOLO 3 FAVORITOS
-   * =========================================================
-   */
+/* =========================================================
+   FONDO ANIMADO
+========================================================= */
 
+const stars = [
+  { left: "7%", top: "10%", size: 25, delay: 0 },
+  { left: "24%", top: "76%", size: 19, delay: 1.5 },
+  { left: "43%", top: "9%", size: 23, delay: 2.2 },
+  { left: "63%", top: "86%", size: 26, delay: 0.8 },
+  { left: "82%", top: "10%", size: 22, delay: 2.7 },
+  { left: "93%", top: "76%", size: 20, delay: 1.2 },
+  { left: "34%", top: "48%", size: 17, delay: 0.4 },
+  { left: "71%", top: "43%", size: 18, delay: 2.8 },
+];
+
+const lights = [
+  { left: "3%", top: "18%", delay: 0, size: 10 },
+  { left: "11%", top: "62%", delay: 1.2, size: 7 },
+  { left: "20%", top: "10%", delay: 2.1, size: 9 },
+  { left: "29%", top: "84%", delay: 0.5, size: 8 },
+  { left: "39%", top: "22%", delay: 1.7, size: 11 },
+  { left: "48%", top: "88%", delay: 2.8, size: 8 },
+  { left: "57%", top: "12%", delay: 0.9, size: 10 },
+  { left: "67%", top: "80%", delay: 2.4, size: 11 },
+  { left: "76%", top: "17%", delay: 1.3, size: 8 },
+  { left: "86%", top: "65%", delay: 3, size: 10 },
+  { left: "94%", top: "27%", delay: 0.7, size: 11 },
+];
+
+const ornaments = [
+  {
+    left: "16%",
+    top: "22%",
+    color: "#7A2631",
+    delay: 0,
+    size: 32,
+  },
+  {
+    left: "88%",
+    top: "43%",
+    color: "#12352B",
+    delay: 1.8,
+    size: 36,
+  },
+  {
+    left: "53%",
+    top: "6%",
+    color: "#C8A45D",
+    delay: 2.5,
+    size: 29,
+  },
+  {
+    left: "5%",
+    top: "70%",
+    color: "#C8A45D",
+    delay: 1,
+    size: 25,
+  },
+];
+
+const particles = Array.from(
+  { length: 34 },
+  (_, index) => ({
+    left: `${(index * 29) % 100}%`,
+    size: 2 + (index % 4),
+    delay: (index % 8) * 0.7,
+    duration: 5 + (index % 5),
+    opacity: 0.3 + (index % 5) * 0.1,
+  })
+);
+
+export default function FeaturedProducts() {
   const featured = products
     .filter((product) => product.featured)
     .slice(0, 3);
-
-  /*
-   * =========================================================
-   * ESTADOS DE COMPRA
-   * =========================================================
-   */
 
   const [selectedProducts, setSelectedProducts] =
     useState<SelectedProduct[]>([]);
@@ -81,24 +143,12 @@ export default function FeaturedProducts() {
       message: "",
     });
 
-  /*
-   * =========================================================
-   * CANTIDAD TOTAL
-   * =========================================================
-   */
-
   const selectedCount =
     selectedProducts.reduce(
       (total, item) =>
         total + item.quantity,
       0
     );
-
-  /*
-   * =========================================================
-   * TOTAL
-   * =========================================================
-   */
 
   const selectedTotal =
     selectedProducts.reduce(
@@ -121,12 +171,6 @@ export default function FeaturedProducts() {
       0
     );
 
-  /*
-   * =========================================================
-   * VERIFICAR SI ESTÁ SELECCIONADO
-   * =========================================================
-   */
-
   const isSelected = (
     productId: string
   ) => {
@@ -135,12 +179,6 @@ export default function FeaturedProducts() {
         item.id === productId
     );
   };
-
-  /*
-   * =========================================================
-   * AÑADIR PRODUCTO
-   * =========================================================
-   */
 
   const addProduct = (
     productId: string
@@ -177,12 +215,6 @@ export default function FeaturedProducts() {
     );
   };
 
-  /*
-   * =========================================================
-   * DISMINUIR PRODUCTO
-   * =========================================================
-   */
-
   const decreaseProduct = (
     productId: string
   ) => {
@@ -205,12 +237,6 @@ export default function FeaturedProducts() {
     );
   };
 
-  /*
-   * =========================================================
-   * ELIMINAR PRODUCTO
-   * =========================================================
-   */
-
   const removeProduct = (
     productId: string
   ) => {
@@ -223,21 +249,9 @@ export default function FeaturedProducts() {
     );
   };
 
-  /*
-   * =========================================================
-   * VACIAR SELECCIÓN
-   * =========================================================
-   */
-
   const clearSelection = () => {
     setSelectedProducts([]);
   };
-
-  /*
-   * =========================================================
-   * ABRIR FORMULARIO
-   * =========================================================
-   */
 
   const openForm = () => {
     if (
@@ -251,12 +265,6 @@ export default function FeaturedProducts() {
     setFormOpen(true);
   };
 
-  /*
-   * =========================================================
-   * CERRAR FORMULARIO
-   * =========================================================
-   */
-
   const closeForm = () => {
     if (sending) {
       return;
@@ -265,12 +273,6 @@ export default function FeaturedProducts() {
     setFormOpen(false);
     setError("");
   };
-
-  /*
-   * =========================================================
-   * ACTUALIZAR FORMULARIO
-   * =========================================================
-   */
 
   const updateFormField = (
     field: keyof FormDataState,
@@ -283,12 +285,6 @@ export default function FeaturedProducts() {
       })
     );
   };
-
-  /*
-   * =========================================================
-   * CREAR MENSAJE DE PRODUCTOS
-   * =========================================================
-   */
 
   const buildProductsMessage =
     () => {
@@ -320,12 +316,6 @@ export default function FeaturedProducts() {
         .filter(Boolean)
         .join("\n\n");
     };
-
-  /*
-   * =========================================================
-   * ENVIAR SOLICITUD
-   * =========================================================
-   */
 
   const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>
@@ -435,11 +425,6 @@ export default function FeaturedProducts() {
         );
       }
 
-      /*
-       * Guardamos el total antes de
-       * limpiar la selección.
-       */
-
       setSubmittedTotal(
         selectedTotal
       );
@@ -470,25 +455,129 @@ export default function FeaturedProducts() {
         className="
           relative
           overflow-hidden
+          bg-[#F6F0E5]
           px-6
-          pb-20
-          pt-4
+          py-20
           text-[#171714]
           sm:px-8
+          sm:py-22
           lg:px-10
-          lg:pb-24
+          lg:py-24
         "
-        style={{
-          backgroundImage:
-            "url('/images/fondo2.png')",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
       >
+        {/* =====================================================
+            FONDO ANIMADO — IGUAL A CATEGORIES
+        ===================================================== */}
+
+        <div className="pointer-events-none absolute inset-0">
+
+          {/* HALO VERDE */}
+
+          <motion.div
+            className="
+              absolute
+              -left-40
+              -top-40
+              h-[600px]
+              w-[600px]
+              rounded-full
+              bg-[#12352B]/[0.14]
+              blur-[100px]
+            "
+            animate={{
+              x: [0, 100, 40, 0],
+              y: [0, 70, -20, 0],
+              scale: [1, 1.25, 0.9, 1],
+              opacity: [0.55, 0.8, 0.5, 0.55],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+
+          {/* HALO ROJO */}
+
+          <motion.div
+            className="
+              absolute
+              -bottom-48
+              -right-40
+              h-[650px]
+              w-[650px]
+              rounded-full
+              bg-[#7A2631]/[0.13]
+              blur-[110px]
+            "
+            animate={{
+              x: [0, -100, -30, 0],
+              y: [0, -70, 20, 0],
+              scale: [1, 1.2, 0.92, 1],
+              opacity: [0.5, 0.8, 0.45, 0.5],
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+
+          {/* GLOW DORADO CENTRAL */}
+
+          <motion.div
+            className="
+              absolute
+              left-1/2
+              top-1/2
+              h-[600px]
+              w-[850px]
+              -translate-x-1/2
+              -translate-y-1/2
+              rounded-full
+              bg-[#C8A45D]/[0.10]
+              blur-[130px]
+            "
+            animate={{
+              scale: [0.7, 1.25, 0.8, 1],
+              opacity: [0.25, 0.75, 0.3, 0.55],
+              rotate: [0, 20, -15, 0],
+            }}
+            transition={{
+              duration: 9,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+
+          {/* GLOW DORADO SUPERIOR */}
+
+          <motion.div
+            className="
+              absolute
+              left-[40%]
+              top-[-180px]
+              h-[400px]
+              w-[400px]
+              rounded-full
+              bg-[#C8A45D]/[0.10]
+              blur-[90px]
+            "
+            animate={{
+              x: [-100, 120, -80],
+              scale: [0.8, 1.2, 0.8],
+              opacity: [0.25, 0.65, 0.25],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        </div>
 
         {/* =====================================================
-            CAPA DE FONDO
+            TEXTURA
         ===================================================== */}
 
         <div
@@ -496,103 +585,614 @@ export default function FeaturedProducts() {
             pointer-events-none
             absolute
             inset-0
-            bg-[#F6F0E5]/25
+            opacity-[0.30]
           "
+          style={{
+            backgroundImage: `
+              radial-gradient(circle, #C8A45D 1.2px, transparent 1.8px)
+            `,
+            backgroundSize: "36px 36px",
+          }}
         />
 
-        <div className="relative z-10 mx-auto max-w-6xl">
+        {/* =====================================================
+            LÍNEAS DE LUZ DIAGONALES
+        ===================================================== */}
+
+        <motion.div
+          className="
+            pointer-events-none
+            absolute
+            -left-[20%]
+            top-[35%]
+            h-[2px]
+            w-[140%]
+            rotate-[-18deg]
+            bg-gradient-to-r
+            from-transparent
+            via-[#C8A45D]/40
+            to-transparent
+            blur-[1px]
+          "
+          animate={{
+            x: ["-10%", "15%", "-10%"],
+            opacity: [0, 1, 0],
+          }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        <motion.div
+          className="
+            pointer-events-none
+            absolute
+            -left-[20%]
+            top-[62%]
+            h-[2px]
+            w-[140%]
+            rotate-[16deg]
+            bg-gradient-to-r
+            from-transparent
+            via-[#7A2631]/30
+            to-transparent
+            blur-[1px]
+          "
+          animate={{
+            x: ["10%", "-15%", "10%"],
+            opacity: [0, 1, 0],
+          }}
+          transition={{
+            duration: 9,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+        />
+
+        {/* =====================================================
+            PARTÍCULAS
+        ===================================================== */}
+
+        {particles.map((particle, index) => (
+          <motion.span
+            key={`particle-${index}`}
+            className="
+              pointer-events-none
+              absolute
+              z-0
+              rounded-full
+              bg-[#C8A45D]
+            "
+            style={{
+              left: particle.left,
+              top: `${15 + ((index * 17) % 80)}%`,
+              width: particle.size,
+              height: particle.size,
+              boxShadow:
+                "0 0 12px 3px rgba(200,164,93,0.45)",
+            }}
+            animate={{
+              y: [-20, 30, -20],
+              x: [-8, 8, -8],
+              opacity: [
+                particle.opacity * 0.3,
+                particle.opacity,
+                particle.opacity * 0.3,
+              ],
+              scale: [0.7, 1.6, 0.7],
+            }}
+            transition={{
+              duration: particle.duration,
+              delay: particle.delay,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+
+        {/* =====================================================
+            ESTRELLAS
+        ===================================================== */}
+
+        {stars.map((star, index) => (
+          <motion.div
+            key={`star-${index}`}
+            className="
+              pointer-events-none
+              absolute
+              z-0
+              text-[#C8A45D]
+              drop-shadow-[0_0_8px_rgba(200,164,93,0.65)]
+            "
+            style={{
+              left: star.left,
+              top: star.top,
+            }}
+            animate={{
+              rotate: [0, 45, -35, 0],
+              scale: [0.5, 1.5, 0.7, 1.2, 0.5],
+              opacity: [0.2, 1, 0.35, 1, 0.2],
+            }}
+            transition={{
+              duration: 4 + index * 0.35,
+              delay: star.delay,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <Star
+              size={star.size}
+              strokeWidth={1.4}
+              fill="currentColor"
+            />
+          </motion.div>
+        ))}
+
+        {/* =====================================================
+            DESTELLOS
+        ===================================================== */}
+
+        <motion.div
+          className="
+            pointer-events-none
+            absolute
+            left-[30%]
+            top-[30%]
+            z-0
+            text-[#C8A45D]
+            drop-shadow-[0_0_15px_rgba(200,164,93,0.8)]
+          "
+          animate={{
+            scale: [0, 1.5, 0],
+            rotate: [0, 90, 180],
+            opacity: [0, 1, 0],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            delay: 1,
+          }}
+        >
+          <Sparkles size={32} />
+        </motion.div>
+
+        <motion.div
+          className="
+            pointer-events-none
+            absolute
+            right-[25%]
+            top-[65%]
+            z-0
+            text-[#C8A45D]
+            drop-shadow-[0_0_15px_rgba(200,164,93,0.8)]
+          "
+          animate={{
+            scale: [0, 1.4, 0],
+            rotate: [0, -90, -180],
+            opacity: [0, 1, 0],
+          }}
+          transition={{
+            duration: 3.5,
+            repeat: Infinity,
+            delay: 2.5,
+          }}
+        >
+          <Sparkles size={27} />
+        </motion.div>
+
+        {/* =====================================================
+            LUCES DORADAS
+        ===================================================== */}
+
+        {lights.map((light, index) => (
+          <motion.div
+            key={`light-${index}`}
+            className="
+              pointer-events-none
+              absolute
+              z-0
+              rounded-full
+              bg-[#C8A45D]
+            "
+            style={{
+              left: light.left,
+              top: light.top,
+              width: light.size,
+              height: light.size,
+              boxShadow:
+                "0 0 25px 8px rgba(200,164,93,0.55)",
+            }}
+            animate={{
+              opacity: [0.15, 1, 0.25, 1, 0.15],
+              scale: [0.5, 1.7, 0.8, 1.5, 0.5],
+              y: [-12, 12, -8, 10, -12],
+            }}
+            transition={{
+              duration: 3,
+              delay: light.delay,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+
+        {/* =====================================================
+            ORNAMENTOS
+        ===================================================== */}
+
+        {ornaments.map((ornament, index) => (
+          <motion.div
+            key={`ornament-${index}`}
+            className="
+              pointer-events-none
+              absolute
+              z-0
+            "
+            style={{
+              left: ornament.left,
+              top: ornament.top,
+            }}
+            animate={{
+              y: [-20, 20, -20],
+              rotate: [-10, 10, -10],
+            }}
+            transition={{
+              duration: 5 + index,
+              delay: ornament.delay,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <div className="flex flex-col items-center">
+
+              <motion.div
+                className="
+                  h-10
+                  w-[2px]
+                  bg-[#C8A45D]/60
+                "
+                animate={{
+                  scaleY: [1, 1.15, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                }}
+              />
+
+              <div
+                className="
+                  h-2
+                  w-4
+                  rounded-sm
+                  bg-[#C8A45D]
+                "
+              />
+
+              <motion.div
+                className="
+                  rounded-full
+                  border-2
+                  border-[#F6F0E5]
+                  shadow-[0_5px_25px_rgba(0,0,0,0.15)]
+                "
+                style={{
+                  width: ornament.size,
+                  height: ornament.size,
+                  backgroundColor:
+                    ornament.color,
+                  boxShadow:
+                    "0 0 25px rgba(200,164,93,0.3)",
+                }}
+                animate={{
+                  scale: [1, 1.12, 1],
+                }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+
+              <motion.div
+                className="
+                  mt-1
+                  h-2
+                  w-2
+                  rounded-full
+                  bg-[#C8A45D]
+                "
+                animate={{
+                  scale: [0.5, 1.8, 0.5],
+                  opacity: [0.3, 1, 0.3],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                }}
+              />
+            </div>
+          </motion.div>
+        ))}
+
+        {/* =====================================================
+            REGALO
+        ===================================================== */}
+
+        <motion.div
+          className="
+            pointer-events-none
+            absolute
+            bottom-12
+            left-[4%]
+            z-0
+            hidden
+            text-[#7A2631]/30
+            lg:block
+          "
+          animate={{
+            y: [0, -18, 0],
+            rotate: [-7, 7, -7],
+            scale: [1, 1.08, 1],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          <Gift
+            size={100}
+            strokeWidth={0.8}
+          />
+        </motion.div>
+
+        {/* =====================================================
+            DECORACIÓN VERDE
+        ===================================================== */}
+
+        <motion.div
+          className="
+            pointer-events-none
+            absolute
+            -right-10
+            -top-10
+            z-0
+            h-40
+            w-80
+            rotate-[8deg]
+            rounded-full
+            border-t-[14px]
+            border-[#12352B]/20
+            shadow-[0_0_30px_rgba(18,53,43,0.15)]
+          "
+          animate={{
+            rotate: [8, 15, 4, 8],
+            x: [0, -15, 10, 0],
+            scale: [1, 1.08, 0.96, 1],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* =====================================================
+            CONTENIDO
+        ===================================================== */}
+
+        <div className="relative z-10 mx-auto max-w-7xl">
 
           {/* ===================================================
-              HEADER
+              HEADER — MISMO FORMATO QUE CATEGORIES
           =================================================== */}
 
           <motion.div
             initial={{
               opacity: 0,
-              y: 20,
+              y: 40,
+              scale: 0.96,
             }}
             whileInView={{
               opacity: 1,
               y: 0,
+              scale: 1,
             }}
             viewport={{
               once: true,
               amount: 0.2,
             }}
             transition={{
-              duration: 0.7,
+              duration: 0.9,
+              ease: [0.22, 1, 0.36, 1],
             }}
             className="
               mx-auto
-              mb-10
-              max-w-2xl
+              mb-12
+              max-w-3xl
               text-center
             "
           >
 
-            <p
-              className="
-                mb-3
-                text-[10px]
-                font-semibold
-                uppercase
-                tracking-[0.25em]
-                text-[#7A2631]
-              "
+            {/* FAVORITOS */}
+
+            <motion.div
+              animate={{
+                y: [0, -4, 0],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
             >
-              Favoritos
-            </p>
+              <p
+                className="
+                  mb-5
+                  text-lg
+                  font-bold
+                  uppercase
+                  tracking-[0.28em]
+                  text-[#7A2631]
+                  sm:text-xl
+                  lg:text-2xl
+                "
+              >
+                ✦ Favoritos de Navidad ✦
+              </p>
+            </motion.div>
+
+            {/* TÍTULO */}
 
             <h2
               className="
-                text-3xl
+                text-4xl
                 font-medium
-                leading-tight
-                tracking-[-0.045em]
-                sm:text-4xl
+                leading-[0.95]
+                tracking-[-0.05em]
+                sm:text-5xl
+                lg:text-6xl
               "
             >
-              Selección de{" "}
-              <span className="text-[#12352B]">
-                Navidad.
+              Lo que hace especial{" "}
+
+              <span className="relative inline-block">
+
+                <motion.span
+                  className="
+                    inline-block
+                    text-[#7A2631]
+                  "
+                  animate={{
+                    y: [0, -3, 0],
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  esta Navidad.
+                </motion.span>
+
+                <motion.span
+                  initial={{
+                    scaleX: 0,
+                    opacity: 0,
+                  }}
+                  whileInView={{
+                    scaleX: 1,
+                    opacity: 1,
+                  }}
+                  viewport={{
+                    once: true,
+                  }}
+                  transition={{
+                    delay: 0.65,
+                    duration: 0.8,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="
+                    absolute
+                    -bottom-2
+                    left-1/2
+                    h-[3px]
+                    w-[78%]
+                    -translate-x-1/2
+                    origin-center
+                    rounded-full
+                    bg-[#C8A45D]
+                    shadow-[0_0_10px_rgba(200,164,93,0.4)]
+                  "
+                />
               </span>
             </h2>
 
-            <p
+            {/* DESCRIPCIÓN — MISMO FORMATO */}
+
+            <motion.p
+              initial={{
+                opacity: 0,
+                y: 12,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                delay: 0.35,
+                duration: 0.7,
+              }}
               className="
                 mx-auto
-                mt-3
-                max-w-md
-                text-[13px]
-                leading-5
-                text-[#171714]/45
+                mt-6
+                max-w-xl
+                text-sm
+                leading-6
+                text-[#171714]/60
+                sm:text-base
               "
             >
-              Una selección de piezas
-              que se han convertido en
-              favoritas para decorar y
-              regalar.
-            </p>
+              Una selección de piezas que se han
+              convertido en favoritas para decorar,
+              regalar y llenar cada espacio de
+              espíritu navideño.
+            </motion.p>
+
+            {/* BOTÓN */}
 
             <motion.a
               href="/catalogo"
+              initial={{
+                opacity: 0,
+                y: 8,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                delay: 0.55,
+                duration: 0.6,
+              }}
               whileHover={{
-                x: 4,
+                x: 5,
               }}
               className="
-                mt-5
+                mt-6
                 inline-flex
                 items-center
-                gap-1.5
-                text-xs
-                font-medium
-                text-[#12352B]
+                gap-2
+                rounded-full
+                border
+                border-[#12352B]/10
+                bg-[#12352B]
+                px-5
+                py-2.5
+                text-[11px]
+                font-semibold
+                uppercase
+                tracking-[0.12em]
+                text-[#F6F0E5]
+                shadow-[0_8px_25px_rgba(18,53,43,0.2)]
+                transition-shadow
+                hover:shadow-[0_10px_30px_rgba(18,53,43,0.3)]
               "
             >
-              Ver todo
+              Ver toda la colección
+
               <ArrowRight size={14} />
             </motion.a>
-
           </motion.div>
 
           {/* ===================================================
@@ -630,7 +1230,6 @@ export default function FeaturedProducts() {
               )
             )}
           </div>
-
         </div>
       </section>
 
@@ -668,7 +1267,6 @@ export default function FeaturedProducts() {
                 -translate-x-1/2
               "
             >
-
               <div
                 className="
                   flex
@@ -687,9 +1285,7 @@ export default function FeaturedProducts() {
                   sm:px-5
                 "
               >
-
                 <div className="flex items-center gap-3">
-
                   <div
                     className="
                       flex
@@ -703,13 +1299,10 @@ export default function FeaturedProducts() {
                       text-[#171714]
                     "
                   >
-                    <ShoppingBag
-                      size={16}
-                    />
+                    <ShoppingBag size={16} />
                   </div>
 
                   <div>
-
                     <p className="text-xs font-semibold">
                       Mi selección
                     </p>
@@ -721,16 +1314,13 @@ export default function FeaturedProducts() {
                       "
                     >
                       {selectedCount}{" "}
-                      {selectedCount ===
-                      1
+                      {selectedCount === 1
                         ? "producto"
                         : "productos"}{" "}
                       · S/{" "}
                       {selectedTotal}
                     </p>
-
                   </div>
-
                 </div>
 
                 <motion.button
@@ -742,9 +1332,7 @@ export default function FeaturedProducts() {
                     scale: 0.97,
                   }}
                   onClick={() =>
-                    setSelectionOpen(
-                      true
-                    )
+                    setSelectionOpen(true)
                   }
                   className="
                     shrink-0
@@ -759,9 +1347,7 @@ export default function FeaturedProducts() {
                 >
                   Ver selección
                 </motion.button>
-
               </div>
-
             </motion.div>
           )}
       </AnimatePresence>
@@ -783,9 +1369,7 @@ export default function FeaturedProducts() {
               opacity: 0,
             }}
             onClick={() =>
-              setSelectionOpen(
-                false
-              )
+              setSelectionOpen(false)
             }
             className="
               fixed
@@ -837,9 +1421,6 @@ export default function FeaturedProducts() {
               shadow-[-20px_0_70px_rgba(8,21,16,0.2)]
             "
           >
-
-            {/* HEADER DRAWER */}
-
             <div
               className="
                 flex
@@ -851,9 +1432,7 @@ export default function FeaturedProducts() {
                 py-5
               "
             >
-
               <div>
-
                 <p
                   className="
                     text-[10px]
@@ -877,15 +1456,12 @@ export default function FeaturedProducts() {
                 >
                   Productos elegidos
                 </h2>
-
               </div>
 
               <button
                 type="button"
                 onClick={() =>
-                  setSelectionOpen(
-                    false
-                  )
+                  setSelectionOpen(false)
                 }
                 className="
                   flex
@@ -904,10 +1480,7 @@ export default function FeaturedProducts() {
               >
                 <X size={18} />
               </button>
-
             </div>
-
-            {/* PRODUCTOS SELECCIONADOS */}
 
             <div
               className="
@@ -917,11 +1490,8 @@ export default function FeaturedProducts() {
                 py-6
               "
             >
-
-              {selectedProducts.length >
-              0 ? (
+              {selectedProducts.length > 0 ? (
                 <div className="space-y-4">
-
                   {selectedProducts.map(
                     (item) => {
                       const product =
@@ -938,9 +1508,7 @@ export default function FeaturedProducts() {
                       return (
                         <motion.div
                           layout
-                          key={
-                            product.id
-                          }
+                          key={product.id}
                           className="
                             flex
                             gap-4
@@ -951,7 +1519,6 @@ export default function FeaturedProducts() {
                             p-3
                           "
                         >
-
                           <div
                             className="
                               h-20
@@ -979,7 +1546,6 @@ export default function FeaturedProducts() {
                           </div>
 
                           <div className="min-w-0 flex-1">
-
                             <div
                               className="
                                 flex
@@ -988,9 +1554,7 @@ export default function FeaturedProducts() {
                                 gap-2
                               "
                             >
-
                               <div>
-
                                 <h3
                                   className="
                                     truncate
@@ -1016,7 +1580,6 @@ export default function FeaturedProducts() {
                                     product.category
                                   }
                                 </p>
-
                               </div>
 
                               <button
@@ -1033,11 +1596,8 @@ export default function FeaturedProducts() {
                                 "
                                 aria-label={`Eliminar ${product.name}`}
                               >
-                                <Trash2
-                                  size={15}
-                                />
+                                <Trash2 size={15} />
                               </button>
-
                             </div>
 
                             <div
@@ -1048,7 +1608,6 @@ export default function FeaturedProducts() {
                                 justify-between
                               "
                             >
-
                               <div
                                 className="
                                   flex
@@ -1061,7 +1620,6 @@ export default function FeaturedProducts() {
                                   p-1
                                 "
                               >
-
                                 <button
                                   type="button"
                                   onClick={() =>
@@ -1081,9 +1639,7 @@ export default function FeaturedProducts() {
                                     hover:bg-[#12352B]/5
                                   "
                                 >
-                                  <Minus
-                                    size={12}
-                                  />
+                                  <Minus size={12} />
                                 </button>
 
                                 <span
@@ -1118,11 +1674,8 @@ export default function FeaturedProducts() {
                                     hover:bg-[#12352B]/5
                                   "
                                 >
-                                  <Plus
-                                    size={12}
-                                  />
+                                  <Plus size={12} />
                                 </button>
-
                               </div>
 
                               <span
@@ -1133,21 +1686,15 @@ export default function FeaturedProducts() {
                                 "
                               >
                                 S/{" "}
-                                {
-                                  product.price *
-                                  item.quantity
-                                }
+                                {product.price *
+                                  item.quantity}
                               </span>
-
                             </div>
-
                           </div>
-
                         </motion.div>
                       );
                     }
                   )}
-
                 </div>
               ) : (
                 <div
@@ -1161,7 +1708,6 @@ export default function FeaturedProducts() {
                     text-center
                   "
                 >
-
                   <div
                     className="
                       flex
@@ -1174,9 +1720,7 @@ export default function FeaturedProducts() {
                       text-[#12352B]/40
                     "
                   >
-                    <ShoppingBag
-                      size={22}
-                    />
+                    <ShoppingBag size={22} />
                   </div>
 
                   <h3 className="mt-5 text-lg font-medium">
@@ -1200,9 +1744,7 @@ export default function FeaturedProducts() {
                   <button
                     type="button"
                     onClick={() =>
-                      setSelectionOpen(
-                        false
-                      )
+                      setSelectionOpen(false)
                     }
                     className="
                       mt-6
@@ -1217,16 +1759,11 @@ export default function FeaturedProducts() {
                   >
                     Volver
                   </button>
-
                 </div>
               )}
-
             </div>
 
-            {/* TOTAL */}
-
-            {selectedProducts.length >
-              0 && (
+            {selectedProducts.length > 0 && (
               <div
                 className="
                   border-t
@@ -1236,7 +1773,6 @@ export default function FeaturedProducts() {
                   py-5
                 "
               >
-
                 <div
                   className="
                     mb-4
@@ -1245,9 +1781,7 @@ export default function FeaturedProducts() {
                     justify-between
                   "
                 >
-
                   <div>
-
                     <p
                       className="
                         text-xs
@@ -1266,12 +1800,8 @@ export default function FeaturedProducts() {
                         text-[#12352B]
                       "
                     >
-                      S/{" "}
-                      {
-                        selectedTotal
-                      }
+                      S/ {selectedTotal}
                     </p>
-
                   </div>
 
                   <button
@@ -1288,7 +1818,6 @@ export default function FeaturedProducts() {
                   >
                     Vaciar selección
                   </button>
-
                 </div>
 
                 <motion.button
@@ -1317,14 +1846,10 @@ export default function FeaturedProducts() {
                   "
                 >
                   Solicitar productos
-                  <ArrowRight
-                    size={16}
-                  />
+                  <ArrowRight size={16} />
                 </motion.button>
-
               </div>
             )}
-
           </motion.aside>
         )}
       </AnimatePresence>
@@ -1357,7 +1882,6 @@ export default function FeaturedProducts() {
               backdrop-blur-md
             "
           >
-
             <motion.div
               initial={{
                 opacity: 0,
@@ -1396,11 +1920,6 @@ export default function FeaturedProducts() {
                 shadow-[0_30px_100px_rgba(0,0,0,0.3)]
               "
             >
-
-              {/* =================================================
-                  ÉXITO
-              ================================================= */}
-
               {sent ? (
                 <div
                   className="
@@ -1414,7 +1933,6 @@ export default function FeaturedProducts() {
                     text-center
                   "
                 >
-
                   <motion.div
                     initial={{
                       scale: 0,
@@ -1544,7 +2062,6 @@ export default function FeaturedProducts() {
                       py-4
                     "
                   >
-
                     <p
                       className="
                         text-xs
@@ -1562,12 +2079,8 @@ export default function FeaturedProducts() {
                         text-[#7A2631]
                       "
                     >
-                      S/{" "}
-                      {
-                        submittedTotal
-                      }
+                      S/ {submittedTotal}
                     </p>
-
                   </motion.div>
 
                   <motion.button
@@ -1585,12 +2098,8 @@ export default function FeaturedProducts() {
                     type="button"
                     onClick={() => {
                       setSent(false);
-                      setFormOpen(
-                        false
-                      );
-                      setSelectionOpen(
-                        false
-                      );
+                      setFormOpen(false);
+                      setSelectionOpen(false);
                     }}
                     className="
                       mt-8
@@ -1609,19 +2118,11 @@ export default function FeaturedProducts() {
                     "
                   >
                     Volver al catálogo
-
-                    <ArrowRight
-                      size={16}
-                    />
+                    <ArrowRight size={16} />
                   </motion.button>
-
                 </div>
               ) : (
                 <>
-                  {/* =================================================
-                      HEADER FORMULARIO
-                  ================================================= */}
-
                   <div
                     className="
                       flex
@@ -1634,9 +2135,7 @@ export default function FeaturedProducts() {
                       sm:px-8
                     "
                   >
-
                     <div>
-
                       <p
                         className="
                           text-[10px]
@@ -1671,17 +2170,12 @@ export default function FeaturedProducts() {
                         Te contactaremos para
                         confirmar tu solicitud.
                       </p>
-
                     </div>
 
                     <button
                       type="button"
-                      onClick={
-                        closeForm
-                      }
-                      disabled={
-                        sending
-                      }
+                      onClick={closeForm}
+                      disabled={sending}
                       className="
                         flex
                         h-10
@@ -1702,20 +2196,12 @@ export default function FeaturedProducts() {
                     >
                       <X size={18} />
                     </button>
-
                   </div>
 
-                  {/* =================================================
-                      FORM
-                  ================================================= */}
-
                   <form
-                    onSubmit={
-                      handleSubmit
-                    }
+                    onSubmit={handleSubmit}
                     className="overflow-y-auto"
                   >
-
                     <div
                       className="
                         grid
@@ -1725,19 +2211,10 @@ export default function FeaturedProducts() {
                         lg:grid-cols-[1fr_0.85fr]
                       "
                     >
-
-                      {/* ================================
-                          DATOS CLIENTE
-                      ================================= */}
-
                       <div>
-
                         <div className="space-y-4">
 
-                          {/* NOMBRE */}
-
                           <div>
-
                             <label
                               htmlFor="featured-name"
                               className="
@@ -1752,7 +2229,6 @@ export default function FeaturedProducts() {
                             </label>
 
                             <div className="relative">
-
                               <User
                                 size={16}
                                 className="
@@ -1778,15 +2254,12 @@ export default function FeaturedProducts() {
                                 ) =>
                                   updateFormField(
                                     "name",
-                                    event
-                                      .target
+                                    event.target
                                       .value
                                   )
                                 }
                                 placeholder="Tu nombre"
-                                disabled={
-                                  sending
-                                }
+                                disabled={sending}
                                 className="
                                   h-12
                                   w-full
@@ -1807,15 +2280,10 @@ export default function FeaturedProducts() {
                                   disabled:opacity-60
                                 "
                               />
-
                             </div>
-
                           </div>
 
-                          {/* CORREO */}
-
                           <div>
-
                             <label
                               htmlFor="featured-email"
                               className="
@@ -1830,7 +2298,6 @@ export default function FeaturedProducts() {
                             </label>
 
                             <div className="relative">
-
                               <Mail
                                 size={16}
                                 className="
@@ -1856,15 +2323,12 @@ export default function FeaturedProducts() {
                                 ) =>
                                   updateFormField(
                                     "email",
-                                    event
-                                      .target
+                                    event.target
                                       .value
                                   )
                                 }
                                 placeholder="tu@email.com"
-                                disabled={
-                                  sending
-                                }
+                                disabled={sending}
                                 className="
                                   h-12
                                   w-full
@@ -1885,15 +2349,10 @@ export default function FeaturedProducts() {
                                   disabled:opacity-60
                                 "
                               />
-
                             </div>
-
                           </div>
 
-                          {/* TELEFONO */}
-
                           <div>
-
                             <label
                               htmlFor="featured-phone"
                               className="
@@ -1908,7 +2367,6 @@ export default function FeaturedProducts() {
                             </label>
 
                             <div className="relative">
-
                               <Phone
                                 size={16}
                                 className="
@@ -1934,15 +2392,12 @@ export default function FeaturedProducts() {
                                 ) =>
                                   updateFormField(
                                     "phone",
-                                    event
-                                      .target
+                                    event.target
                                       .value
                                   )
                                 }
                                 placeholder="Tu número de contacto"
-                                disabled={
-                                  sending
-                                }
+                                disabled={sending}
                                 className="
                                   h-12
                                   w-full
@@ -1963,15 +2418,10 @@ export default function FeaturedProducts() {
                                   disabled:opacity-60
                                 "
                               />
-
                             </div>
-
                           </div>
 
-                          {/* MENSAJE */}
-
                           <div>
-
                             <label
                               htmlFor="featured-message"
                               className="
@@ -1996,7 +2446,6 @@ export default function FeaturedProducts() {
                             </label>
 
                             <div className="relative">
-
                               <MessageSquare
                                 size={16}
                                 className="
@@ -2019,16 +2468,13 @@ export default function FeaturedProducts() {
                                 ) =>
                                   updateFormField(
                                     "message",
-                                    event
-                                      .target
+                                    event.target
                                       .value
                                   )
                                 }
                                 placeholder="¿Quieres dejarnos alguna indicación?"
                                 rows={4}
-                                disabled={
-                                  sending
-                                }
+                                disabled={sending}
                                 className="
                                   w-full
                                   resize-none
@@ -2051,14 +2497,9 @@ export default function FeaturedProducts() {
                                   disabled:opacity-60
                                 "
                               />
-
                             </div>
-
                           </div>
-
                         </div>
-
-                        {/* ERROR */}
 
                         <AnimatePresence>
                           {error && (
@@ -2092,15 +2533,9 @@ export default function FeaturedProducts() {
                             </motion.div>
                           )}
                         </AnimatePresence>
-
                       </div>
 
-                      {/* ================================
-                          RESUMEN
-                      ================================= */}
-
                       <div>
-
                         <div
                           className="
                             rounded-2xl
@@ -2110,7 +2545,6 @@ export default function FeaturedProducts() {
                             p-5
                           "
                         >
-
                           <div
                             className="
                               flex
@@ -2118,9 +2552,7 @@ export default function FeaturedProducts() {
                               justify-between
                             "
                           >
-
                             <div>
-
                               <p
                                 className="
                                   text-[10px]
@@ -2143,7 +2575,6 @@ export default function FeaturedProducts() {
                               >
                                 Tu selección
                               </h3>
-
                             </div>
 
                             <span
@@ -2157,11 +2588,8 @@ export default function FeaturedProducts() {
                                 text-[#F6F0E5]
                               "
                             >
-                              {
-                                selectedCount
-                              }
+                              {selectedCount}
                             </span>
-
                           </div>
 
                           <div
@@ -2173,21 +2601,16 @@ export default function FeaturedProducts() {
                           />
 
                           <div className="space-y-3">
-
                             {selectedProducts.map(
                               (item) => {
                                 const product =
                                   products.find(
-                                    (
-                                      product
-                                    ) =>
+                                    (product) =>
                                       product.id ===
                                       item.id
                                   );
 
-                                if (
-                                  !product
-                                ) {
+                                if (!product) {
                                   return null;
                                 }
 
@@ -2203,9 +2626,7 @@ export default function FeaturedProducts() {
                                       gap-3
                                     "
                                   >
-
                                     <div className="min-w-0">
-
                                       <p
                                         className="
                                           truncate
@@ -2234,7 +2655,6 @@ export default function FeaturedProducts() {
                                           product.price
                                         }
                                       </p>
-
                                     </div>
 
                                     <span
@@ -2251,12 +2671,10 @@ export default function FeaturedProducts() {
                                         item.quantity
                                       }
                                     </span>
-
                                   </div>
                                 );
                               }
                             )}
-
                           </div>
 
                           <div
@@ -2274,9 +2692,7 @@ export default function FeaturedProducts() {
                               justify-between
                             "
                           >
-
                             <div>
-
                               <p
                                 className="
                                   text-[10px]
@@ -2295,12 +2711,8 @@ export default function FeaturedProducts() {
                                   text-[#12352B]
                                 "
                               >
-                                S/{" "}
-                                {
-                                  selectedTotal
-                                }
+                                S/ {selectedTotal}
                               </p>
-
                             </div>
 
                             <span
@@ -2312,9 +2724,7 @@ export default function FeaturedProducts() {
                               {selectedCount}{" "}
                               unidades
                             </span>
-
                           </div>
-
                         </div>
 
                         <p
@@ -2331,12 +2741,8 @@ export default function FeaturedProducts() {
                           detalles finales se
                           confirmarán posteriormente.
                         </p>
-
                       </div>
-
                     </div>
-
-                    {/* BOTÓN ENVIAR */}
 
                     <div
                       className="
@@ -2348,12 +2754,9 @@ export default function FeaturedProducts() {
                         sm:px-8
                       "
                     >
-
                       <motion.button
                         type="submit"
-                        disabled={
-                          sending
-                        }
+                        disabled={sending}
                         whileHover={
                           !sending
                             ? {
@@ -2387,26 +2790,20 @@ export default function FeaturedProducts() {
                           disabled:opacity-60
                         "
                       >
-
                         {sending ? (
                           <>
                             <LoaderCircle
                               size={17}
                               className="animate-spin"
                             />
-
                             Enviando solicitud...
                           </>
                         ) : (
                           <>
                             Enviar solicitud
-
-                            <ArrowRight
-                              size={16}
-                            />
+                            <ArrowRight size={16} />
                           </>
                         )}
-
                       </motion.button>
 
                       <p
@@ -2421,15 +2818,11 @@ export default function FeaturedProducts() {
                         únicamente para gestionar
                         esta solicitud.
                       </p>
-
                     </div>
-
                   </form>
                 </>
               )}
-
             </motion.div>
-
           </motion.div>
         )}
       </AnimatePresence>
@@ -2466,12 +2859,6 @@ function ProductCard({
 
   const [isHovering, setIsHovering] =
     useState(false);
-
-  /*
-   * =========================================================
-   * CAMBIO AUTOMÁTICO DE IMAGEN
-   * =========================================================
-   */
 
   useEffect(() => {
     if (
@@ -2546,18 +2933,15 @@ function ProductCard({
       }}
       className="group"
     >
-
-      {/* =====================================================
-          IMAGEN
-      ===================================================== */}
-
       <div
         className="
           relative
           aspect-[0.92]
           overflow-hidden
           rounded-[1.5rem]
-          bg-[#E7D8B8]/35
+          bg-[#081510]
+          ring-1
+          ring-[#C8A45D]/15
         "
         onMouseEnter={
           handleMouseEnter
@@ -2566,9 +2950,6 @@ function ProductCard({
           handleMouseLeave
         }
       >
-
-        {/* IMÁGENES */}
-
         {images.map(
           (image, imageIndex) => (
             <motion.img
@@ -2589,7 +2970,6 @@ function ProductCard({
                   imageIndex
                     ? 1
                     : 0,
-
                 scale:
                   currentImage ===
                   imageIndex
@@ -2601,7 +2981,6 @@ function ProductCard({
                   duration: 0.25,
                   ease: "easeOut",
                 },
-
                 scale: {
                   duration: 0.45,
                   ease: "easeOut",
@@ -2618,8 +2997,6 @@ function ProductCard({
           )
         )}
 
-        {/* GRADIENTE */}
-
         <div
           className="
             pointer-events-none
@@ -2631,8 +3008,6 @@ function ProductCard({
             to-transparent
           "
         />
-
-        {/* CATEGORÍA */}
 
         <div
           className="
@@ -2654,8 +3029,6 @@ function ProductCard({
         >
           {product.category}
         </div>
-
-        {/* FAVORITO */}
 
         <motion.button
           type="button"
@@ -2692,8 +3065,6 @@ function ProductCard({
           />
         </motion.button>
 
-        {/* INDICADORES */}
-
         {images.length > 1 && (
           <div
             className="
@@ -2727,7 +3098,6 @@ function ProductCard({
                       imageIndex
                         ? 14
                         : 4,
-
                     opacity:
                       currentImage ===
                       imageIndex
@@ -2748,10 +3118,6 @@ function ProductCard({
             )}
           </div>
         )}
-
-        {/* =================================================
-            AÑADIR
-        ================================================= */}
 
         <motion.button
           type="button"
@@ -2789,7 +3155,6 @@ function ProductCard({
             }
           `}
         >
-
           {isSelected ? (
             <>
               <Plus size={14} />
@@ -2797,20 +3162,12 @@ function ProductCard({
             </>
           ) : (
             <>
-              <ShoppingBag
-                size={14}
-              />
+              <ShoppingBag size={14} />
               Añadir al carrito
             </>
           )}
-
         </motion.button>
-
       </div>
-
-      {/* =====================================================
-          INFORMACIÓN
-      ===================================================== */}
 
       <div
         className="
@@ -2821,14 +3178,13 @@ function ProductCard({
           gap-4
         "
       >
-
         <div>
-
           <h3
             className="
               text-base
               font-medium
               tracking-[-0.025em]
+              text-[#171714]
             "
           >
             {product.name}
@@ -2840,12 +3196,11 @@ function ProductCard({
               max-w-[230px]
               text-[12px]
               leading-5
-              text-[#171714]/45
+              text-[#171714]/50
             "
           >
             {product.description}
           </p>
-
         </div>
 
         <span
@@ -2858,9 +3213,7 @@ function ProductCard({
         >
           S/ {product.price}
         </span>
-
       </div>
-
     </motion.article>
   );
 }

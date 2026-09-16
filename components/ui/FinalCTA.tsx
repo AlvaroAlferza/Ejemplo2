@@ -3,10 +3,17 @@
 import { motion } from "motion/react";
 import {
   ArrowUpRight,
+  MessageCircle,
   Sparkles,
 } from "lucide-react";
 
 export default function FinalCTA() {
+  const whatsappMessage = encodeURIComponent(
+    "🎄 Hola, quisiera conocer más detalles sobre sus productos y la colección de Navidad."
+  );
+
+  const whatsappUrl = `https://wa.me/51958032002?text=${whatsappMessage}`;
+
   return (
     <section
       id="contacto"
@@ -15,16 +22,15 @@ export default function FinalCTA() {
         isolate
         overflow-hidden
         px-6
-        pb-6
-        pt-3
+        pb-5
+        pt-2
         text-[#F6F0E5]
         sm:px-8
         lg:px-10
       "
     >
-
       {/* =====================================================
-          VIDEO — FONDO DE TODO EL COMPONENTE
+          VIDEO — FONDO
       ===================================================== */}
 
       <video
@@ -44,13 +50,13 @@ export default function FinalCTA() {
         "
       >
         <source
-          src="/images/navidad3.mp4"
+          src="/images/navidad1.mp4"
           type="video/mp4"
         />
       </video>
 
       {/* =====================================================
-          CAPA OSCURA GENERAL
+          CAPA OSCURA
       ===================================================== */}
 
       <div
@@ -59,7 +65,7 @@ export default function FinalCTA() {
           absolute
           inset-0
           -z-10
-          bg-[#081510]/45
+          bg-[#081510]/50
         "
       />
 
@@ -74,9 +80,9 @@ export default function FinalCTA() {
           inset-0
           -z-10
           bg-gradient-to-b
-          from-[#081510]/20
-          via-[#081510]/35
-          to-[#081510]/70
+          from-[#081510]/25
+          via-[#081510]/40
+          to-[#081510]/75
         "
       />
 
@@ -90,7 +96,7 @@ export default function FinalCTA() {
           absolute
           inset-0
           -z-10
-          bg-[radial-gradient(circle_at_center,transparent_15%,rgba(8,21,16,0.45)_100%)]
+          bg-[radial-gradient(circle_at_center,transparent_15%,rgba(8,21,16,0.48)_100%)]
         "
       />
 
@@ -114,13 +120,13 @@ export default function FinalCTA() {
           left-1/2
           top-1/2
           -z-10
-          h-[350px]
-          w-[350px]
+          h-[280px]
+          w-[280px]
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
           bg-[#C8A45D]
-          blur-[110px]
+          blur-[100px]
         "
       />
 
@@ -131,37 +137,40 @@ export default function FinalCTA() {
       <motion.div
         initial={{
           opacity: 0,
-          y: 20,
+          y: 40,
+          scale: 0.96,
         }}
         whileInView={{
           opacity: 1,
           y: 0,
+          scale: 1,
         }}
         viewport={{
           once: true,
+          amount: 0.2,
         }}
         transition={{
-          duration: 0.7,
+          duration: 0.9,
+          ease: [0.22, 1, 0.36, 1],
         }}
         className="
           relative
           mx-auto
           flex
-          min-h-[310px]
+          min-h-[250px]
           max-w-7xl
           items-center
           justify-center
           px-6
-          py-12
+          py-8
           text-center
-          sm:min-h-[330px]
+          sm:min-h-[270px]
           sm:px-10
-          sm:py-14
-          lg:min-h-[350px]
-          lg:py-16
+          sm:py-10
+          lg:min-h-[285px]
+          lg:py-11
         "
       >
-
         {/* ===================================================
             DECORACIÓN
         =================================================== */}
@@ -185,7 +194,7 @@ export default function FinalCTA() {
             text-[#C8A45D]
           "
         >
-          <Sparkles size={24} />
+          <Sparkles size={22} />
         </motion.div>
 
         <motion.div
@@ -206,7 +215,7 @@ export default function FinalCTA() {
             text-[#E7D8B8]/60
           "
         >
-          <Sparkles size={15} />
+          <Sparkles size={14} />
         </motion.div>
 
         {/* ===================================================
@@ -215,7 +224,9 @@ export default function FinalCTA() {
 
         <div className="relative z-10">
 
-          {/* ICONO */}
+          {/* =================================================
+              ICONO
+          ================================================= */}
 
           <motion.div
             initial={{
@@ -233,9 +244,12 @@ export default function FinalCTA() {
               delay: 0.1,
               duration: 0.5,
             }}
+            animate={{
+              y: [0, -3, 0],
+            }}
             className="
               mx-auto
-              mb-4
+              mb-5
               flex
               h-9
               w-9
@@ -244,7 +258,7 @@ export default function FinalCTA() {
               rounded-full
               border
               border-[#C8A45D]/40
-              bg-[#081510]/30
+              bg-[#081510]/35
               text-[#C8A45D]
               backdrop-blur-sm
             "
@@ -252,73 +266,182 @@ export default function FinalCTA() {
             <Sparkles size={15} />
           </motion.div>
 
-          {/* LABEL */}
+          {/* =================================================
+              LABEL — MISMO ESTILO DE LAS OTRAS SECCIONES
+          ================================================= */}
 
-          <p
-            className="
-              text-[10px]
-              font-semibold
-              uppercase
-              tracking-[0.25em]
-              text-[#E7D8B8]
-            "
+          <motion.div
+            animate={{
+              y: [0, -4, 0],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
           >
-            Esta Navidad
-          </p>
+            <p
+              className="
+                mb-5
+                text-lg
+                font-bold
+                uppercase
+                tracking-[0.28em]
+                text-[#7A2631]
+                sm:text-xl
+                lg:text-2xl
+              "
+            >
+              ✦ Esta Navidad ✦
+            </p>
+          </motion.div>
 
-          {/* TITULO */}
+          {/* =================================================
+              TÍTULO
+          ================================================= */}
 
           <h2
             className="
               mx-auto
-              mt-3
               max-w-2xl
-              text-3xl
+              text-4xl
               font-medium
-              leading-[0.98]
+              leading-[0.95]
               tracking-[-0.05em]
-              text-[#F8F3E8]
-              sm:text-4xl
-              lg:text-5xl
+              sm:text-5xl
+              lg:text-6xl
             "
           >
             Haz que tu espacio
             <br />
-            <span className="text-[#E7D8B8]">
-              se sienta especial.
+
+            <span className="relative inline-block">
+
+              {/* TEXTO ROJO */}
+
+              <motion.span
+                className="
+                  inline-block
+                  text-[#7A2631]
+                "
+                animate={{
+                  y: [0, -3, 0],
+                }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                se sienta especial.
+              </motion.span>
+
+              {/* =================================================
+                  RAYITA DORADA
+              ================================================= */}
+
+              <motion.span
+                initial={{
+                  scaleX: 0,
+                  opacity: 0,
+                }}
+                whileInView={{
+                  scaleX: 1,
+                  opacity: 1,
+                }}
+                viewport={{
+                  once: true,
+                }}
+                transition={{
+                  delay: 0.65,
+                  duration: 0.8,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="
+                  absolute
+                  -bottom-2
+                  left-1/2
+                  h-[3px]
+                  w-[78%]
+                  -translate-x-1/2
+                  origin-center
+                  rounded-full
+                  bg-[#C8A45D]
+                  shadow-[0_0_10px_rgba(200,164,93,0.55)]
+                "
+              />
+
             </span>
           </h2>
 
-          {/* DESCRIPCIÓN */}
+          {/* =================================================
+              DESCRIPCIÓN
+          ================================================= */}
 
-          <p
+          <motion.p
+            initial={{
+              opacity: 0,
+              y: 12,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+            }}
+            transition={{
+              delay: 0.35,
+              duration: 0.7,
+            }}
             className="
               mx-auto
-              mt-5
-              max-w-md
-              text-[13px]
-              leading-5
-              text-[#F6F0E5]/65
-              sm:text-sm
+              mt-6
+              max-w-lg
+              text-sm
+              leading-6
+              text-[#F6F0E5]/75
+              sm:text-base
             "
           >
-            Descubre personajes, adornos y pequeños detalles
-            pensados para celebrar a tu manera.
-          </p>
+            ¿Tienes alguna duda o buscas algo especial?
+            <br className="hidden sm:block" />
+            Chatea con nosotros y te ayudamos con todos los detalles.
+          </motion.p>
 
-          {/* BOTÓN */}
+          {/* =================================================
+              BOTÓN WHATSAPP
+          ================================================= */}
 
           <motion.a
-            href="#productos"
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{
+              opacity: 0,
+              y: 12,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+            }}
+            transition={{
+              delay: 0.5,
+              duration: 0.7,
+            }}
             whileHover={{
-              scale: 1.035,
+              scale: 1.05,
+              y: -2,
             }}
             whileTap={{
               scale: 0.97,
             }}
             className="
               group
-              mt-6
+              mt-7
               inline-flex
               items-center
               gap-2.5
@@ -326,7 +449,7 @@ export default function FinalCTA() {
               bg-[#C8A45D]
               px-6
               py-3
-              text-xs
+              text-sm
               font-semibold
               text-[#171714]
               shadow-[0_12px_35px_rgba(200,164,93,0.2)]
@@ -335,10 +458,12 @@ export default function FinalCTA() {
               hover:shadow-[0_15px_45px_rgba(200,164,93,0.35)]
             "
           >
-            Explorar colección
+            <MessageCircle size={16} />
+
+            Chatea con nosotros
 
             <ArrowUpRight
-              size={15}
+              size={16}
               className="
                 transition-transform
                 duration-300
@@ -347,6 +472,34 @@ export default function FinalCTA() {
               "
             />
           </motion.a>
+
+          {/* =================================================
+              TEXTO INFERIOR
+          ================================================= */}
+
+          <motion.p
+            initial={{
+              opacity: 0,
+            }}
+            whileInView={{
+              opacity: 1,
+            }}
+            viewport={{
+              once: true,
+            }}
+            transition={{
+              delay: 0.7,
+              duration: 0.6,
+            }}
+            className="
+              mt-4
+              text-[10px]
+              text-[#F6F0E5]/45
+              sm:text-xs
+            "
+          >
+            Te ayudamos a encontrar el detalle perfecto para esta Navidad.
+          </motion.p>
 
         </div>
       </motion.div>

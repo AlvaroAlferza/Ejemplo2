@@ -1,37 +1,20 @@
+
 "use client";
 
 import { motion } from "motion/react";
 import {
-  PackageCheck,
-  HeartHandshake,
-  Truck,
-  Gift,
+  MapPin,
+  Navigation,
+  ExternalLink,
+  Sparkles,
   Star,
 } from "lucide-react";
 
-const steps = [
-  {
-    number: "01",
-    icon: PackageCheck,
-    title: "Elige tus favoritos",
-    description:
-      "Explora nuestras colecciones y encuentra las piezas que más te gusten.",
-  },
-  {
-    number: "02",
-    icon: HeartHandshake,
-    title: "Preparamos tu pedido",
-    description:
-      "Cuidamos cada detalle para que tu compra llegue lista para disfrutar.",
-  },
-  {
-    number: "03",
-    icon: Truck,
-    title: "Recibe la magia",
-    description:
-      "Tu pedido llega a casa para comenzar a transformar tus espacios.",
-  },
-];
+const GOOGLE_MAPS_URL =
+  "https://www.google.com/maps/search/?api=1&query=Arequipa%2C%20Per%C3%BA";
+
+const GOOGLE_MAPS_EMBED =
+  "https://www.google.com/maps?q=Arequipa%2C%20Per%C3%BA&output=embed";
 
 /* =========================================================
    ESTRELLAS
@@ -89,9 +72,10 @@ const ornaments = [
   },
 ];
 
-export default function Experience() {
+export default function LocationSection() {
   return (
     <section
+      id="ubicacion"
       className="
         relative
         isolate
@@ -242,7 +226,7 @@ export default function Experience() {
 
       {stars.map((star, index) => (
         <motion.div
-          key={`star-${index}`}
+          key={`location-star-${index}`}
           className="
             pointer-events-none
             absolute
@@ -279,7 +263,7 @@ export default function Experience() {
 
       {lights.map((light, index) => (
         <motion.div
-          key={`light-${index}`}
+          key={`location-light-${index}`}
           className="
             pointer-events-none
             absolute
@@ -315,7 +299,7 @@ export default function Experience() {
 
       {ornaments.map((ornament, index) => (
         <motion.div
-          key={`ornament-${index}`}
+          key={`location-ornament-${index}`}
           className="
             pointer-events-none
             absolute
@@ -367,38 +351,7 @@ export default function Experience() {
       ))}
 
       {/* =====================================================
-          REGALO DECORATIVO
-      ===================================================== */}
-
-      <motion.div
-        className="
-          pointer-events-none
-          absolute
-          bottom-10
-          left-[5%]
-          z-0
-          hidden
-          text-[#C8A45D]/20
-          lg:block
-        "
-        animate={{
-          y: [0, -8, 0],
-          rotate: [-4, 4, -4],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <Gift
-          size={65}
-          strokeWidth={0.8}
-        />
-      </motion.div>
-
-      {/* =====================================================
-          DECORACIÓN SUPERIOR
+          DECORACIÓN SUPERIOR DERECHA
       ===================================================== */}
 
       <motion.div
@@ -432,9 +385,9 @@ export default function Experience() {
 
       <div className="relative z-10 mx-auto max-w-7xl">
 
-        {/* =====================================================
+        {/* =================================================
             HEADER
-        ===================================================== */}
+        ================================================= */}
 
         <motion.div
           initial={{
@@ -486,7 +439,7 @@ export default function Experience() {
                 lg:text-2xl
               "
             >
-              ✦ Así funciona ✦
+              ✦ Encuéntranos ✦
             </p>
           </motion.div>
 
@@ -503,7 +456,7 @@ export default function Experience() {
               lg:text-6xl
             "
           >
-            Comprar Navidad debería ser{" "}
+            Estamos más cerca de{" "}
 
             <span className="relative inline-block">
               <motion.span
@@ -520,7 +473,7 @@ export default function Experience() {
                   ease: "easeInOut",
                 }}
               >
-                simple.
+                lo que imaginas.
               </motion.span>
 
               {/* SUBRAYADO */}
@@ -586,210 +539,422 @@ export default function Experience() {
               sm:text-base
             "
           >
-            Un proceso sencillo para que solo tengas que
-            preocuparte por disfrutar la Navidad.
+            Visítanos y descubre personalmente todo lo que
+            hemos preparado para esta Navidad.
           </motion.p>
         </motion.div>
 
-        {/* =====================================================
-            PASOS
-        ===================================================== */}
+        {/* =================================================
+            MAPA
+        ================================================= */}
 
-        <div className="grid gap-4 md:grid-cols-3">
-          {steps.map((step, index) => {
-            const Icon = step.icon;
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 30,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.15,
+          }}
+          transition={{
+            duration: 0.8,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="
+            relative
+            overflow-hidden
+            rounded-[1.5rem]
+            border
+            border-[#C8A45D]/25
+            bg-[#081510]
+            p-1
+            shadow-[0_25px_65px_rgba(0,0,0,0.30)]
+          "
+        >
+          {/* BORDE INTERIOR */}
 
-            return (
+          <div
+            className="
+              relative
+              overflow-hidden
+              rounded-[1.25rem]
+              bg-[#F6F0E5]
+            "
+          >
+            {/* MAPA */}
+
+            <div
+              className="
+                relative
+                h-[280px]
+                w-full
+                sm:h-[320px]
+                lg:h-[350px]
+              "
+            >
+              <iframe
+                src={GOOGLE_MAPS_EMBED}
+                width="100%"
+                height="100%"
+                style={{
+                  border: 0,
+                }}
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Ubicación en Google Maps"
+                className="
+                  absolute
+                  inset-0
+                  h-full
+                  w-full
+                  grayscale-[15%]
+                  contrast-[0.95]
+                "
+              />
+
+              {/* DEGRADADO SUPERIOR */}
+
+              <div
+                className="
+                  pointer-events-none
+                  absolute
+                  inset-x-0
+                  top-0
+                  h-20
+                  bg-gradient-to-b
+                  from-[#081510]/25
+                  to-transparent
+                "
+              />
+
+              {/* SPARKLE */}
+
               <motion.div
-                key={step.number}
+                className="
+                  pointer-events-none
+                  absolute
+                  right-5
+                  top-5
+                  text-[#C8A45D]
+                "
+                animate={{
+                  rotate: [0, 15, -15, 0],
+                  scale: [0.8, 1.1, 0.8],
+                  opacity: [0.35, 0.9, 0.35],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <Sparkles
+                  size={23}
+                  strokeWidth={1.2}
+                />
+              </motion.div>
+
+              {/* =================================================
+                  TARJETA FLOTANTE
+              ================================================= */}
+
+              <motion.div
                 initial={{
                   opacity: 0,
-                  y: 25,
+                  x: -20,
+                  y: 15,
                 }}
                 whileInView={{
                   opacity: 1,
+                  x: 0,
                   y: 0,
                 }}
                 viewport={{
                   once: true,
-                  amount: 0.15,
                 }}
                 transition={{
-                  delay: index * 0.12,
-                  duration: 0.7,
+                  delay: 0.3,
+                  duration: 0.65,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                whileHover={{
-                  y: -5,
-                }}
                 className="
-                  group
-                  relative
-                  overflow-hidden
-                  rounded-[1.35rem]
-                  border
-                  border-[#C8A45D]/25
-                  bg-[#081510]
-                  px-6
-                  py-5
-                  shadow-[0_18px_50px_rgba(0,0,0,0.22)]
-                  transition-colors
-                  duration-300
-                  hover:border-[#C8A45D]/45
+                  absolute
+                  bottom-4
+                  left-4
+                  max-w-[calc(100%-2rem)]
+                  sm:bottom-5
+                  sm:left-5
+                  sm:max-w-xs
                 "
               >
-                {/* GLOW INTERIOR */}
-
-                <motion.div
-                  animate={{
-                    opacity: [0.03, 0.10, 0.03],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: index * 0.5,
-                  }}
-                  className="
-                    pointer-events-none
-                    absolute
-                    -right-16
-                    -top-16
-                    h-40
-                    w-40
-                    rounded-full
-                    bg-[#C8A45D]
-                    blur-[60px]
-                  "
-                />
-
-                {/* PEQUEÑO GLOW ROJO */}
-
                 <div
                   className="
-                    pointer-events-none
-                    absolute
-                    -bottom-12
-                    -left-12
-                    h-28
-                    w-28
-                    rounded-full
-                    bg-[#7A2631]/15
-                    blur-[45px]
-                  "
-                />
-
-                {/* NÚMERO */}
-
-                <span
-                  className="
-                    absolute
-                    right-5
-                    top-5
-                    text-[10px]
-                    font-semibold
-                    tracking-[0.2em]
-                    text-[#F6F0E5]/25
-                  "
-                >
-                  {step.number}
-                </span>
-
-                {/* ICONO */}
-
-                <motion.div
-                  animate={{
-                    boxShadow: [
-                      "0 0 0 rgba(200,164,93,0)",
-                      "0 0 18px rgba(200,164,93,0.20)",
-                      "0 0 0 rgba(200,164,93,0)",
-                    ],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: index * 0.5,
-                  }}
-                  className="
                     relative
-                    mb-5
-                    flex
-                    h-10
-                    w-10
-                    items-center
-                    justify-center
-                    rounded-full
+                    overflow-hidden
+                    rounded-[1.2rem]
                     border
-                    border-[#C8A45D]/45
-                    bg-[#12352B]
-                    text-[#C8A45D]
+                    border-[#C8A45D]/25
+                    bg-[#F6F0E5]/95
+                    p-4
+                    shadow-[0_15px_40px_rgba(0,0,0,0.25)]
+                    backdrop-blur-xl
+                    sm:p-5
                   "
                 >
-                  <Icon
-                    size={17}
-                    strokeWidth={1.5}
+                  {/* LÍNEA ROJA */}
+
+                  <div
+                    className="
+                      absolute
+                      left-0
+                      top-0
+                      h-full
+                      w-1
+                      bg-[#7A2631]
+                    "
                   />
-                </motion.div>
 
-                {/* TÍTULO */}
+                  <div className="flex items-center gap-3">
 
-                <h3
-                  className="
-                    relative
-                    text-xl
-                    font-medium
-                    leading-tight
-                    tracking-[-0.035em]
-                    text-[#F6F0E5]
-                  "
-                >
-                  {step.title}
-                </h3>
+                    {/* ICONO */}
 
-                {/* DESCRIPCIÓN */}
+                    <motion.div
+                      animate={{
+                        y: [0, -3, 0],
+                      }}
+                      transition={{
+                        duration: 3.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="
+                        flex
+                        h-10
+                        w-10
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-full
+                        bg-[#7A2631]
+                        text-[#F6F0E5]
+                        shadow-[0_7px_20px_rgba(122,38,49,0.25)]
+                      "
+                    >
+                      <MapPin
+                        size={19}
+                        strokeWidth={1.8}
+                      />
+                    </motion.div>
 
-                <p
-                  className="
-                    relative
-                    mt-2
-                    max-w-sm
-                    text-sm
-                    leading-5
-                    text-[#F6F0E5]/55
-                  "
-                >
-                  {step.description}
-                </p>
+                    <div>
 
-                {/* LÍNEA DORADA */}
+                      <p
+                        className="
+                          text-[10px]
+                          font-bold
+                          uppercase
+                          tracking-[0.18em]
+                          text-[#7A2631]
+                        "
+                      >
+                        Nuestra ubicación
+                      </p>
 
-                <motion.div
-                  animate={{
-                    opacity: [0.25, 0.8, 0.25],
-                    scaleX: [0.7, 1, 0.7],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: index * 0.4,
-                  }}
-                  className="
-                    absolute
-                    bottom-0
-                    left-6
-                    h-px
-                    w-12
-                    origin-left
-                    bg-[#C8A45D]
-                    shadow-[0_0_8px_rgba(200,164,93,0.45)]
-                  "
-                />
+                      <h3
+                        className="
+                          mt-0.5
+                          text-xl
+                          font-semibold
+                          tracking-[-0.03em]
+                          text-[#171714]
+                        "
+                      >
+                        Arequipa, Perú
+                      </h3>
+
+                    </div>
+                  </div>
+
+                  {/* DESCRIPCIÓN */}
+
+                  <p
+                    className="
+                      mt-3
+                      text-xs
+                      leading-5
+                      text-[#171714]/60
+                    "
+                  >
+                    Encuéntranos y vive la experiencia
+                    navideña de cerca.
+                  </p>
+
+                  {/* BOTÓN */}
+
+                  <motion.a
+                    href={GOOGLE_MAPS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{
+                      y: -2,
+                    }}
+                    whileTap={{
+                      scale: 0.97,
+                    }}
+                    className="
+                      mt-4
+                      flex
+                      w-full
+                      items-center
+                      justify-center
+                      gap-2
+                      rounded-full
+                      bg-[#12352B]
+                      px-4
+                      py-2.5
+                      text-xs
+                      font-semibold
+                      text-[#F6F0E5]
+                      shadow-[0_8px_22px_rgba(18,53,43,0.25)]
+                      transition-colors
+                      hover:bg-[#7A2631]
+                    "
+                  >
+                    <Navigation
+                      size={15}
+                      strokeWidth={2}
+                    />
+
+                    Cómo llegar
+
+                    <ExternalLink
+                      size={13}
+                      strokeWidth={1.8}
+                    />
+                  </motion.a>
+                </div>
               </motion.div>
-            );
-          })}
-        </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* =================================================
+            INFO INFERIOR
+        ================================================= */}
+
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 12,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+          }}
+          transition={{
+            delay: 0.2,
+            duration: 0.6,
+          }}
+          className="
+            mt-4
+            flex
+            flex-col
+            items-center
+            justify-between
+            gap-3
+            text-center
+            sm:flex-row
+            sm:text-left
+          "
+        >
+          <div className="flex items-center gap-2.5">
+
+            <div
+              className="
+                flex
+                h-8
+                w-8
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-[#C8A45D]/40
+                bg-[#C8A45D]/10
+                text-[#C8A45D]
+              "
+            >
+              <MapPin
+                size={15}
+                strokeWidth={1.8}
+              />
+            </div>
+
+            <div>
+
+              <p
+                className="
+                  text-[10px]
+                  font-semibold
+                  uppercase
+                  tracking-[0.15em]
+                  text-[#F6F0E5]/45
+                "
+              >
+                Ubicación
+              </p>
+
+              <p
+                className="
+                  text-xs
+                  font-medium
+                  text-[#F6F0E5]
+                "
+              >
+                Arequipa, Perú
+              </p>
+
+            </div>
+          </div>
+
+          <a
+            href={GOOGLE_MAPS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
+              group
+              flex
+              items-center
+              gap-2
+              text-xs
+              font-semibold
+              text-[#C8A45D]
+              transition-colors
+              hover:text-[#F6F0E5]
+            "
+          >
+            Abrir en Google Maps
+
+            <ExternalLink
+              size={14}
+              className="
+                transition-transform
+                duration-300
+                group-hover:-translate-y-0.5
+                group-hover:translate-x-0.5
+              "
+            />
+          </a>
+        </motion.div>
+
       </div>
     </section>
   );

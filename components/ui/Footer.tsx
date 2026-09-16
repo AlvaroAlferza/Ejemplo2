@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import {
   ArrowUp,
   Mail,
+  MapPin,
 } from "lucide-react";
 
 import {
@@ -35,28 +36,26 @@ export default function Footer() {
     <footer
       className="
         relative
+        isolate
         overflow-hidden
         bg-[#081510]
         px-6
-        pb-6
-        pt-16
+        pb-5
+        pt-11
         text-[#F6F0E5]
         sm:px-8
         lg:px-10
-        lg:pt-20
+        lg:pt-14
       "
     >
-
       {/* =====================================================
-          VIDEO DE FONDO
+          IMAGEN DE FONDO
       ===================================================== */}
 
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
+      <img
+        src="/images/fondo4.jpg"
+        alt=""
+        aria-hidden="true"
         className="
           pointer-events-none
           absolute
@@ -65,15 +64,10 @@ export default function Footer() {
           w-full
           object-cover
         "
-      >
-        <source
-          src="/images/navidad7.mp4"
-          type="video/mp4"
-        />
-      </video>
+      />
 
       {/* =====================================================
-          OVERLAY PRINCIPAL
+          OVERLAY MUY SUTIL
       ===================================================== */}
 
       <div
@@ -81,12 +75,12 @@ export default function Footer() {
           pointer-events-none
           absolute
           inset-0
-          bg-[#081510]/45
+          bg-[#081510]/10
         "
       />
 
       {/* =====================================================
-          GRADIENTE PARA LEGIBILIDAD
+          GRADIENTE MUY SUAVE
       ===================================================== */}
 
       <div
@@ -95,14 +89,14 @@ export default function Footer() {
           absolute
           inset-0
           bg-gradient-to-b
-          from-[#081510]/20
-          via-[#081510]/35
-          to-[#081510]/75
+          from-[#081510]/5
+          via-transparent
+          to-[#081510]/45
         "
       />
 
       {/* =====================================================
-          VIÑETA LATERAL
+          VIÑETA SUAVE
       ===================================================== */}
 
       <div
@@ -110,34 +104,7 @@ export default function Footer() {
           pointer-events-none
           absolute
           inset-0
-          bg-[radial-gradient(circle_at_center,transparent_15%,rgba(8,21,16,0.45)_100%)]
-        "
-      />
-
-      {/* =====================================================
-          GLOW DORADO
-      ===================================================== */}
-
-      <motion.div
-        animate={{
-          scale: [1, 1.12, 1],
-          opacity: [0.05, 0.12, 0.05],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="
-          pointer-events-none
-          absolute
-          -right-40
-          -top-40
-          h-[500px]
-          w-[500px]
-          rounded-full
-          bg-[#C8A45D]
-          blur-[130px]
+          bg-[radial-gradient(circle_at_center,transparent_30%,rgba(8,21,16,0.18)_100%)]
         "
       />
 
@@ -148,18 +115,19 @@ export default function Footer() {
       <div className="relative z-10 mx-auto max-w-7xl">
 
         {/* ===================================================
-            TOP
+            CONTENIDO PRINCIPAL
         =================================================== */}
 
         <div
           className="
             grid
-            gap-12
+            gap-9
             border-b
-            border-[#F6F0E5]/15
-            pb-12
-            lg:grid-cols-[1.7fr_1fr_1fr]
-            lg:gap-16
+            border-[#F6F0E5]/20
+            pb-9
+            lg:grid-cols-[1.8fr_0.9fr_0.9fr]
+            lg:gap-12
+            lg:pb-10
           "
         >
 
@@ -184,11 +152,13 @@ export default function Footer() {
               duration: 0.7,
             }}
           >
-
             {/* LOGO */}
 
-            <a
+            <motion.a
               href="#"
+              whileHover={{
+                y: -2,
+              }}
               className="
                 inline-flex
                 items-center
@@ -200,61 +170,121 @@ export default function Footer() {
                   text-2xl
                   font-semibold
                   tracking-[-0.055em]
+                  drop-shadow-[0_2px_8px_rgba(0,0,0,0.25)]
+                  sm:text-[27px]
                 "
               >
                 NAVIDAD
               </span>
 
-              <span
+              <motion.span
+                animate={{
+                  rotate: [0, 12, -12, 0],
+                  scale: [1, 1.12, 1],
+                }}
+                transition={{
+                  duration: 3.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
                 className="
                   text-lg
                   text-[#C8A45D]
+                  drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]
                 "
               >
                 ✦
-              </span>
-            </a>
+              </motion.span>
+            </motion.a>
 
             {/* DESCRIPCIÓN */}
 
             <p
               className="
-                mt-5
+                mt-4
                 max-w-md
                 text-sm
                 leading-6
-                text-[#F6F0E5]/65
+                text-[#F6F0E5]/80
+                drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]
                 sm:text-[15px]
-                sm:leading-7
               "
             >
               Detalles que hacen especial la Navidad.
               Adornos, personajes y regalos para crear
-              espacios llenos de magia y celebrar con intención.
+              espacios llenos de magia.
             </p>
 
-            {/* EMAIL */}
+            {/* CONTACTO */}
 
-            <a
-              href="mailto:hola@navidad.com"
+            <div
               className="
-                mt-6
-                inline-flex
-                items-center
-                gap-2.5
-                text-sm
-                font-medium
-                text-[#E7D8B8]
-                transition-colors
-                duration-300
-                hover:text-white
+                mt-5
+                flex
+                flex-col
+                gap-3
+                sm:flex-row
+                sm:items-center
+                sm:gap-5
               "
             >
-              <Mail size={16} />
+              <a
+                href="mailto:hola@navidad.com"
+                className="
+                  inline-flex
+                  w-fit
+                  items-center
+                  gap-2
+                  text-sm
+                  font-medium
+                  text-[#F6F0E5]/90
+                  drop-shadow-[0_2px_7px_rgba(0,0,0,0.35)]
+                  transition-colors
+                  duration-300
+                  hover:text-[#C8A45D]
+                "
+              >
+                <Mail
+                  size={15}
+                  strokeWidth={1.8}
+                />
 
-              hola@navidad.com
-            </a>
+                hola@navidad.com
+              </a>
 
+              <span
+                className="
+                  hidden
+                  h-4
+                  w-px
+                  bg-[#F6F0E5]/25
+                  sm:block
+                "
+              />
+
+              <a
+                href="#ubicacion"
+                className="
+                  inline-flex
+                  w-fit
+                  items-center
+                  gap-2
+                  text-sm
+                  text-[#F6F0E5]/80
+                  drop-shadow-[0_2px_7px_rgba(0,0,0,0.35)]
+                  transition-colors
+                  duration-300
+                  hover:text-[#F6F0E5]
+                "
+              >
+                <MapPin
+                  size={15}
+                  strokeWidth={1.8}
+                />
+
+                Arequipa, Perú
+              </a>
+            </div>
           </motion.div>
 
           {/* =================================================
@@ -279,22 +309,21 @@ export default function Footer() {
               duration: 0.7,
             }}
           >
-
             <p
               className="
-                mb-5
+                mb-4
                 text-xs
                 font-semibold
                 uppercase
                 tracking-[0.22em]
                 text-[#C8A45D]
+                drop-shadow-[0_2px_7px_rgba(0,0,0,0.4)]
               "
             >
               Explorar
             </p>
 
-            <div className="flex flex-col gap-3.5">
-
+            <div className="flex flex-col gap-2.5">
               {links[0].items.map((item) => (
                 <a
                   key={item.label}
@@ -302,7 +331,8 @@ export default function Footer() {
                   className="
                     w-fit
                     text-sm
-                    text-[#F6F0E5]/65
+                    text-[#F6F0E5]/80
+                    drop-shadow-[0_2px_7px_rgba(0,0,0,0.4)]
                     transition-all
                     duration-300
                     hover:translate-x-1
@@ -312,9 +342,7 @@ export default function Footer() {
                   {item.label}
                 </a>
               ))}
-
             </div>
-
           </motion.div>
 
           {/* =================================================
@@ -339,22 +367,21 @@ export default function Footer() {
               duration: 0.7,
             }}
           >
-
             <p
               className="
-                mb-5
+                mb-4
                 text-xs
                 font-semibold
                 uppercase
                 tracking-[0.22em]
                 text-[#C8A45D]
+                drop-shadow-[0_2px_7px_rgba(0,0,0,0.4)]
               "
             >
               Ayuda
             </p>
 
-            <div className="flex flex-col gap-3.5">
-
+            <div className="flex flex-col gap-2.5">
               {links[1].items.map((item) => (
                 <a
                   key={item.label}
@@ -362,7 +389,8 @@ export default function Footer() {
                   className="
                     w-fit
                     text-sm
-                    text-[#F6F0E5]/65
+                    text-[#F6F0E5]/80
+                    drop-shadow-[0_2px_7px_rgba(0,0,0,0.4)]
                     transition-all
                     duration-300
                     hover:translate-x-1
@@ -372,11 +400,8 @@ export default function Footer() {
                   {item.label}
                 </a>
               ))}
-
             </div>
-
           </motion.div>
-
         </div>
 
         {/* ===================================================
@@ -388,25 +413,28 @@ export default function Footer() {
             flex
             flex-col
             justify-between
-            gap-6
-            py-6
+            gap-5
+            py-5
             sm:flex-row
             sm:items-center
           "
         >
-
           {/* COPYRIGHT */}
 
           <p
             className="
-              text-xs
-              text-[#F6F0E5]/40
+              text-[11px]
+              tracking-wide
+              text-[#F6F0E5]/65
+              drop-shadow-[0_2px_7px_rgba(0,0,0,0.45)]
             "
           >
             © 2026 Navidad. Todos los derechos reservados.
           </p>
 
-          {/* SOCIAL */}
+          {/* =================================================
+              SOCIAL + TOP
+          ================================================= */}
 
           <div className="flex items-center gap-2.5">
 
@@ -415,7 +443,7 @@ export default function Footer() {
             <motion.a
               href="#"
               whileHover={{
-                y: -4,
+                y: -3,
                 scale: 1.04,
               }}
               whileTap={{
@@ -424,24 +452,24 @@ export default function Footer() {
               aria-label="Instagram"
               className="
                 flex
-                h-10
-                w-10
+                h-9
+                w-9
                 items-center
                 justify-center
                 rounded-full
                 border
-                border-[#F6F0E5]/20
-                bg-[#081510]/35
-                text-[#F6F0E5]/70
-                backdrop-blur-md
+                border-[#F6F0E5]/30
+                bg-[#081510]/20
+                text-[#F6F0E5]/85
+                backdrop-blur-[2px]
                 transition-all
                 duration-300
-                hover:border-[#C8A45D]/60
-                hover:bg-[#C8A45D]/15
+                hover:border-[#C8A45D]/70
+                hover:bg-[#C8A45D]/20
                 hover:text-[#C8A45D]
               "
             >
-              <FaInstagram size={15} />
+              <FaInstagram size={14} />
             </motion.a>
 
             {/* FACEBOOK */}
@@ -449,7 +477,7 @@ export default function Footer() {
             <motion.a
               href="#"
               whileHover={{
-                y: -4,
+                y: -3,
                 scale: 1.04,
               }}
               whileTap={{
@@ -458,24 +486,24 @@ export default function Footer() {
               aria-label="Facebook"
               className="
                 flex
-                h-10
-                w-10
+                h-9
+                w-9
                 items-center
                 justify-center
                 rounded-full
                 border
-                border-[#F6F0E5]/20
-                bg-[#081510]/35
-                text-[#F6F0E5]/70
-                backdrop-blur-md
+                border-[#F6F0E5]/30
+                bg-[#081510]/20
+                text-[#F6F0E5]/85
+                backdrop-blur-[2px]
                 transition-all
                 duration-300
-                hover:border-[#C8A45D]/60
-                hover:bg-[#C8A45D]/15
+                hover:border-[#C8A45D]/70
+                hover:bg-[#C8A45D]/20
                 hover:text-[#C8A45D]
               "
             >
-              <FaFacebookF size={14} />
+              <FaFacebookF size={13} />
             </motion.a>
 
             {/* BACK TO TOP */}
@@ -483,8 +511,8 @@ export default function Footer() {
             <motion.a
               href="#"
               whileHover={{
-                y: -4,
-                scale: 1.06,
+                y: -3,
+                scale: 1.05,
               }}
               whileTap={{
                 scale: 0.94,
@@ -493,26 +521,26 @@ export default function Footer() {
               className="
                 ml-1
                 flex
-                h-10
-                w-10
+                h-9
+                w-9
                 items-center
                 justify-center
                 rounded-full
                 bg-[#C8A45D]
                 text-[#171714]
-                shadow-[0_8px_30px_rgba(200,164,93,0.25)]
+                shadow-[0_8px_25px_rgba(200,164,93,0.28)]
                 transition-shadow
                 duration-300
-                hover:shadow-[0_8px_35px_rgba(200,164,93,0.45)]
+                hover:shadow-[0_8px_30px_rgba(200,164,93,0.45)]
               "
             >
-              <ArrowUp size={16} />
+              <ArrowUp
+                size={15}
+                strokeWidth={2}
+              />
             </motion.a>
-
           </div>
-
         </div>
-
       </div>
     </footer>
   );

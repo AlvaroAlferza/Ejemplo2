@@ -8,6 +8,7 @@ import Experience from "@/components/ui/Experience";
 import FinalCTA from "@/components/ui/FinalCTA";
 import Footer from "@/components/ui/Footer";
 import Reviews from "@/components/ui/Reviews";
+import LocationSection from "@/components/ui/LocationSection";
 
 
 export default function Home() {
@@ -24,9 +25,11 @@ export default function Home() {
      
 
     
-      <FinalCTA />
+      
       <Experience />
       <Reviews />
+      <LocationSection />
+      <FinalCTA />
 
       
 
