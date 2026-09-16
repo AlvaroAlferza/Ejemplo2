@@ -6,11 +6,12 @@ import {
   MessageCircle,
   Sparkles,
 } from "lucide-react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export default function FinalCTA() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pauseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const animationFrameRef = useRef<number | null>(null);
 
   const whatsappMessage = encodeURIComponent(
     "🎄 Hola, quisiera conocer más detalles sobre sus productos y la colección de Navidad."
@@ -19,34 +20,80 @@ export default function FinalCTA() {
   const whatsappUrl = `https://wa.me/51958032002?text=${whatsappMessage}`;
 
   /* =========================================================
-     VIDEO
-     0s → 2.5s → pausa 1.5s → vuelve a 0s → repite
+     CONTROL DEL VIDEO
+
+     0s → 2.5s
+     ↓
+     pausa 1.5s
+     ↓
+     vuelve a 0s
+     ↓
+     repite infinitamente
   ========================================================= */
 
-  const handleVideoTimeUpdate = () => {
+  useEffect(() => {
     const video = videoRef.current;
 
     if (!video) return;
 
-    if (video.currentTime >= 2.5) {
-      video.currentTime = 2.5;
-      video.pause();
+    let isWaiting = false;
 
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
+    const checkVideoTime = () => {
+      const currentVideo = videoRef.current;
+
+      if (!currentVideo) return;
+
+      if (
+        currentVideo.currentTime >= 2.5 &&
+        !isWaiting
+      ) {
+        isWaiting = true;
+
+        currentVideo.currentTime = 2.5;
+        currentVideo.pause();
+
+        pauseTimeoutRef.current = setTimeout(() => {
+          const nextVideo = videoRef.current;
+
+          if (!nextVideo) return;
+
+          nextVideo.currentTime = 0;
+
+          isWaiting = false;
+
+          nextVideo
+            .play()
+            .catch(() => {});
+        }, 1500);
       }
 
-      timeoutRef.current = setTimeout(() => {
-        if (!videoRef.current) return;
+      animationFrameRef.current =
+        requestAnimationFrame(checkVideoTime);
+    };
 
-        videoRef.current.currentTime = 0;
+    const startVideo = () => {
+      video
+        .play()
+        .catch(() => {});
+    };
 
-        videoRef.current
-          .play()
-          .catch(() => {});
-      }, 1500);
-    }
-  };
+    startVideo();
+
+    animationFrameRef.current =
+      requestAnimationFrame(checkVideoTime);
+
+    return () => {
+      if (animationFrameRef.current !== null) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+
+      if (pauseTimeoutRef.current !== null) {
+        clearTimeout(pauseTimeoutRef.current);
+      }
+
+      video.pause();
+    };
+  }, []);
 
   return (
     <section
@@ -58,7 +105,6 @@ export default function FinalCTA() {
         px-6
         pb-5
         pt-2
-        text-[#F6F0E5]
         sm:px-8
         lg:px-10
       "
@@ -69,11 +115,9 @@ export default function FinalCTA() {
 
       <video
         ref={videoRef}
-        autoPlay
         muted
         playsInline
         preload="auto"
-        onTimeUpdate={handleVideoTimeUpdate}
         className="
           pointer-events-none
           absolute
@@ -82,7 +126,8 @@ export default function FinalCTA() {
           h-full
           w-full
           object-cover
-          brightness-[1.15]
+          brightness-[1.08]
+          saturate-[1.08]
         "
       >
         <source
@@ -92,7 +137,9 @@ export default function FinalCTA() {
       </video>
 
       {/* =====================================================
-          CAPA OSCURA — MUY SUTIL
+          CAPA MUY SUTIL
+          Solo ayuda a que el contenido mantenga contraste
+          sin apagar el video.
       ===================================================== */}
 
       <div
@@ -101,12 +148,12 @@ export default function FinalCTA() {
           absolute
           inset-0
           -z-10
-          bg-[#081510]/10
+          bg-white/[0.04]
         "
       />
 
       {/* =====================================================
-          DEGRADADO — MUY SUTIL
+          DEGRADADO MUY SUTIL
       ===================================================== */}
 
       <div
@@ -116,14 +163,14 @@ export default function FinalCTA() {
           inset-0
           -z-10
           bg-gradient-to-b
-          from-[#081510]/5
+          from-white/[0.02]
           via-transparent
-          to-[#081510]/25
+          to-[#081510]/15
         "
       />
 
       {/* =====================================================
-          VIÑETA
+          VIÑETA MUY SUAVE
       ===================================================== */}
 
       <div
@@ -132,7 +179,7 @@ export default function FinalCTA() {
           absolute
           inset-0
           -z-10
-          bg-[radial-gradient(circle_at_center,transparent_35%,rgba(8,21,16,0.18)_100%)]
+          bg-[radial-gradient(circle_at_center,transparent_45%,rgba(8,21,16,0.12)_100%)]
         "
       />
 
@@ -143,7 +190,7 @@ export default function FinalCTA() {
       <motion.div
         animate={{
           scale: [1, 1.08, 1],
-          opacity: [0.06, 0.14, 0.06],
+          opacity: [0.04, 0.10, 0.04],
         }}
         transition={{
           duration: 7,
@@ -208,14 +255,14 @@ export default function FinalCTA() {
         "
       >
         {/* ===================================================
-            DECORACIÓN — DERECHA
+            DECORACIÓN DERECHA
         =================================================== */}
 
         <motion.div
           animate={{
             y: [0, -6, 0],
             rotate: [0, 5, 0],
-            opacity: [0.35, 0.7, 0.35],
+            opacity: [0.45, 0.9, 0.45],
           }}
           transition={{
             duration: 5,
@@ -234,13 +281,13 @@ export default function FinalCTA() {
         </motion.div>
 
         {/* ===================================================
-            DECORACIÓN — IZQUIERDA
+            DECORACIÓN IZQUIERDA
         =================================================== */}
 
         <motion.div
           animate={{
             y: [0, 5, 0],
-            opacity: [0.2, 0.5, 0.2],
+            opacity: [0.3, 0.7, 0.3],
           }}
           transition={{
             duration: 4,
@@ -252,7 +299,7 @@ export default function FinalCTA() {
             absolute
             bottom-[15%]
             left-[10%]
-            text-[#E7D8B8]/60
+            text-[#7A2631]/70
           "
         >
           <Sparkles size={14} />
@@ -297,9 +344,10 @@ export default function FinalCTA() {
               justify-center
               rounded-full
               border
-              border-[#C8A45D]/40
-              bg-[#081510]/35
+              border-[#12352B]/25
+              bg-white/65
               text-[#C8A45D]
+              shadow-[0_8px_25px_rgba(18,53,43,0.12)]
               backdrop-blur-sm
             "
           >
@@ -327,7 +375,7 @@ export default function FinalCTA() {
                 font-bold
                 uppercase
                 tracking-[0.28em]
-                text-[#7A2631]
+                text-[#12352B]
                 sm:text-xl
                 lg:text-2xl
               "
@@ -348,6 +396,8 @@ export default function FinalCTA() {
               font-medium
               leading-[0.95]
               tracking-[-0.05em]
+              text-[#12352B]
+              drop-shadow-[0_2px_10px_rgba(255,255,255,0.25)]
               sm:text-5xl
               lg:text-6xl
             "
@@ -357,12 +407,13 @@ export default function FinalCTA() {
 
             <span className="relative inline-block">
 
-              {/* TEXTO ROJO */}
+              {/* TEXTO ROJO VINO */}
 
               <motion.span
                 className="
                   inline-block
                   text-[#7A2631]
+                  drop-shadow-[0_2px_8px_rgba(255,255,255,0.3)]
                 "
                 animate={{
                   y: [0, -3, 0],
@@ -407,7 +458,7 @@ export default function FinalCTA() {
                   origin-center
                   rounded-full
                   bg-[#C8A45D]
-                  shadow-[0_0_10px_rgba(200,164,93,0.55)]
+                  shadow-[0_0_10px_rgba(200,164,93,0.65)]
                 "
               />
 
@@ -439,8 +490,10 @@ export default function FinalCTA() {
               mt-6
               max-w-lg
               text-sm
+              font-medium
               leading-6
-              text-[#F6F0E5]/75
+              text-[#12352B]/80
+              drop-shadow-[0_1px_5px_rgba(255,255,255,0.3)]
               sm:text-base
             "
           >
@@ -486,16 +539,16 @@ export default function FinalCTA() {
               items-center
               gap-2.5
               rounded-full
-              bg-[#C8A45D]
+              bg-[#12352B]
               px-6
               py-3
               text-sm
               font-semibold
-              text-[#171714]
-              shadow-[0_12px_35px_rgba(200,164,93,0.2)]
+              text-[#F6F0E5]
+              shadow-[0_12px_35px_rgba(18,53,43,0.25)]
               transition-shadow
               duration-300
-              hover:shadow-[0_15px_45px_rgba(200,164,93,0.35)]
+              hover:shadow-[0_15px_45px_rgba(18,53,43,0.4)]
             "
           >
             <MessageCircle size={16} />
@@ -534,7 +587,8 @@ export default function FinalCTA() {
             className="
               mt-4
               text-[10px]
-              text-[#F6F0E5]/45
+              font-medium
+              text-[#12352B]/65
               sm:text-xs
             "
           >
