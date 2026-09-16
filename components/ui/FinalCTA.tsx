@@ -6,13 +6,47 @@ import {
   MessageCircle,
   Sparkles,
 } from "lucide-react";
+import { useRef } from "react";
 
 export default function FinalCTA() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const whatsappMessage = encodeURIComponent(
     "🎄 Hola, quisiera conocer más detalles sobre sus productos y la colección de Navidad."
   );
 
   const whatsappUrl = `https://wa.me/51958032002?text=${whatsappMessage}`;
+
+  /* =========================================================
+     VIDEO
+     0s → 2.5s → pausa 1.5s → vuelve a 0s → repite
+  ========================================================= */
+
+  const handleVideoTimeUpdate = () => {
+    const video = videoRef.current;
+
+    if (!video) return;
+
+    if (video.currentTime >= 2.5) {
+      video.currentTime = 2.5;
+      video.pause();
+
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+
+      timeoutRef.current = setTimeout(() => {
+        if (!videoRef.current) return;
+
+        videoRef.current.currentTime = 0;
+
+        videoRef.current
+          .play()
+          .catch(() => {});
+      }, 1500);
+    }
+  };
 
   return (
     <section
@@ -34,11 +68,12 @@ export default function FinalCTA() {
       ===================================================== */}
 
       <video
+        ref={videoRef}
         autoPlay
         muted
-        loop
         playsInline
         preload="auto"
+        onTimeUpdate={handleVideoTimeUpdate}
         className="
           pointer-events-none
           absolute
@@ -47,16 +82,17 @@ export default function FinalCTA() {
           h-full
           w-full
           object-cover
+          brightness-[1.15]
         "
       >
         <source
-          src="/images/navidad1.mp4"
+          src="/images/video10.mp4"
           type="video/mp4"
         />
       </video>
 
       {/* =====================================================
-          CAPA OSCURA
+          CAPA OSCURA — MUY SUTIL
       ===================================================== */}
 
       <div
@@ -65,12 +101,12 @@ export default function FinalCTA() {
           absolute
           inset-0
           -z-10
-          bg-[#081510]/50
+          bg-[#081510]/10
         "
       />
 
       {/* =====================================================
-          DEGRADADO
+          DEGRADADO — MUY SUTIL
       ===================================================== */}
 
       <div
@@ -80,9 +116,9 @@ export default function FinalCTA() {
           inset-0
           -z-10
           bg-gradient-to-b
-          from-[#081510]/25
-          via-[#081510]/40
-          to-[#081510]/75
+          from-[#081510]/5
+          via-transparent
+          to-[#081510]/25
         "
       />
 
@@ -96,7 +132,7 @@ export default function FinalCTA() {
           absolute
           inset-0
           -z-10
-          bg-[radial-gradient(circle_at_center,transparent_15%,rgba(8,21,16,0.48)_100%)]
+          bg-[radial-gradient(circle_at_center,transparent_35%,rgba(8,21,16,0.18)_100%)]
         "
       />
 
@@ -172,7 +208,7 @@ export default function FinalCTA() {
         "
       >
         {/* ===================================================
-            DECORACIÓN
+            DECORACIÓN — DERECHA
         =================================================== */}
 
         <motion.div
@@ -197,6 +233,10 @@ export default function FinalCTA() {
           <Sparkles size={22} />
         </motion.div>
 
+        {/* ===================================================
+            DECORACIÓN — IZQUIERDA
+        =================================================== */}
+
         <motion.div
           animate={{
             y: [0, 5, 0],
@@ -219,7 +259,7 @@ export default function FinalCTA() {
         </motion.div>
 
         {/* ===================================================
-            BLOQUE
+            BLOQUE PRINCIPAL
         =================================================== */}
 
         <div className="relative z-10">
@@ -267,7 +307,7 @@ export default function FinalCTA() {
           </motion.div>
 
           {/* =================================================
-              LABEL — MISMO ESTILO DE LAS OTRAS SECCIONES
+              LABEL
           ================================================= */}
 
           <motion.div
